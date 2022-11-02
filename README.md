@@ -1,3 +1,5 @@
+![example workflow](https://github.com/Kolterdyx/CementEngine/.github/workflows/cmake.yml/badge.svg)
+
 # Cement Engine
 
 The Cement Engine is a C++ engine designed for the development of 2D games/programs. It is designed to be as simple as
