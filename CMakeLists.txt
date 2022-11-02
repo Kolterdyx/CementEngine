@@ -19,15 +19,11 @@ set(CementSources
         Core/EventSystem/EventDispatcher.hpp
         Core/EventSystem/BaseEvent.hpp
         Core/SceneSystem/SceneSystem.hpp
-        Core/SceneSystem/SceneSystem.hpp
-)
-
-set(TestSources
-        test/framework/UnitTest.cpp
-        test/framework/UnitTest.hpp
-        test/framework/color.hpp
-        test/TestEventSystem.hpp
-        test/TestSceneSystem.hpp
+        Core/SceneSystem/BaseScene.cpp
+        Core/SceneSystem/BaseScene.hpp
+        Core/SceneSystem/SceneStateManager.cpp
+        Core/SceneSystem/SceneStateManager.hpp
+        Core/ComponentSystem/ComponentSystem.hpp
 )
 
 add_executable(CementEngine
