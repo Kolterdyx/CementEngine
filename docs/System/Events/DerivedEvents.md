@@ -15,7 +15,7 @@ class MessageEvent : protected BaseEvent {
     // Field to store our data
     std::string msg;
 
-    EventType type() const override {
+    EventType getType() const override {
         return event_type;
     };
     
@@ -50,8 +50,8 @@ Subscribe the callbacks to the desired event:
 ```c++
 MyClass myClassInst();
 
-void dispatcher.subscribe(MessageEvent::event_type, std::bind(&onMessageEventFunction, NULL, std::placeholders::_1));
-void dispatcher.subscribe(MessageEvent::event_type, std::bind(&MyClass.onMessageEventMethod, myClassInst, std::placeholders::_1));
+void dispatcher.subscribe(MessageEvent::type, [](const BaseEvent& e){ onMessageEventFunction(e); });
+void dispatcher.subscribe(MessageEvent::type, [](const BaseEvent& e){ myClassInst.onMessageEventMethod(e); });
 ```
 
 ### Firing/Posting the event
