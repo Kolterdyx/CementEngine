@@ -35,6 +35,11 @@ add_executable(CementEngine
         ${CementSources}
 )
 
-add_executable(tests tests.cpp ${CementSources})
+set(TestSources
+        test/TestEventSystem.cpp
+        test/TestSceneSystem.cpp
+)
+
+add_executable(tests ${TestSources} ${CementSources})
 
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
