@@ -26,11 +26,6 @@ set(CementSources
         Core/ComponentSystem/ComponentSystem.hpp
 )
 
-add_executable(CementEngine
-        main.cpp
-        ${CementSources}
-)
-
 set(TestSources
         test/TestEventSystem.cpp
         test/TestSceneSystem.cpp
@@ -39,3 +34,8 @@ set(TestSources
 add_executable(tests ${TestSources} ${CementSources})
 
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
+add_executable(CementEngine
+        main.cpp
+        ${CementSources}
+)
