@@ -23,7 +23,7 @@ jobs:
         # A list of files, directories, and wildcard patterns to cache and restore
         path: ${{github.workspace}}/build
         # An explicit key for restoring and saving the cache
-        key: a
+        key: ${{ runner.os }}-build
 
     - name: Build
       working-directory: ${{github.workspace}}
