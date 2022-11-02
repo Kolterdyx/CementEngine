@@ -2,8 +2,22 @@ name: CMake
 
 on:
   push:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+      - ".github/**"
+      - ".gitignore"
+      - ".gitmodules"
     branches: [ "master" ]
   pull_request:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+      - ".github/**"
+      - ".gitignore"
+      - ".gitmodules"
     branches: [ "master" ]
 
 jobs:
