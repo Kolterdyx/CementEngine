@@ -1,6 +1,3 @@
-//
-// Created by kolterdyx on 2/11/22.
-//
 
 #ifndef CEMENTENGINE_BASESCENE_HPP
 #define CEMENTENGINE_BASESCENE_HPP
@@ -25,7 +22,7 @@ public:
 
     BaseScene();
 
-    BaseScene(unsigned int id);
+    explicit BaseScene(unsigned int id);
 
 };
 

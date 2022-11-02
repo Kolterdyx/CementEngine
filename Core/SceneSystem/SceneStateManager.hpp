@@ -24,6 +24,8 @@ public:
 
     void setCurrentScene(unsigned int id);
 
+    void updateCurrentScene();
+
     std::shared_ptr<BaseScene> getCurrentScene();
 
     SceneStateManager();

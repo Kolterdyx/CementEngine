@@ -39,3 +39,9 @@ SceneStateManager::SceneStateManager() {
     _currentScene = 0;
 }
 
+void SceneStateManager::updateCurrentScene() {
+    if (_scenes.find(_currentScene) != _scenes.end()) {
+        _scenes[_currentScene]->update();
+    }
+}
+
