@@ -1,6 +1,7 @@
 #include "Core/EventSystem/EventSystem.hpp"
 #include "catch2/catch_test_macros.hpp"
 
+
 int i = 0;
 
 std::string test;
@@ -39,37 +40,44 @@ void testHandler2(const BaseEvent &e) {
 }
 
 TEST_CASE("Test the Event system", "[Event System]") {
+
+    i = 0;
+    test = "";
+
     EventDispatcher dispatcher;
 
     SECTION("Test basic event subscription") {
-        dispatcher.subscribe("Test 1", [](const BaseEvent& e) { testHandler1(e); });
-        dispatcher.subscribe("Test 2", [](const BaseEvent& e) { testHandler2(e); });
+        dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
+        dispatcher.subscribe("Test 2", [](const BaseEvent &e) { testHandler2(e); });
 
         dispatcher.post(TestEvent2("Hello"));
 
-        REQUIRE( test == "Hello" );
-        REQUIRE( i == 0 );
+        REQUIRE(test == "Hello");
+        REQUIRE(i == 0);
     }
 
     SECTION("Test proper event dispatching") {
+
+        dispatcher.subscribe("Test 2", [](const BaseEvent &e) { testHandler2(e); });
         dispatcher.post(TestEvent1());
 
-        REQUIRE( test == "Hello" );
-        REQUIRE( i == 1 );
+        REQUIRE(test == "");
+        REQUIRE(i == 0);
 
-        dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
         dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
 
         dispatcher.post(TestEvent1());
+        dispatcher.post(TestEvent2("Hello"));
 
         REQUIRE(test == "Hello");
-        REQUIRE(i == 4);
+        REQUIRE(i == 1);
 
-
+        dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
+        dispatcher.post(TestEvent1());
         dispatcher.post(TestEvent2("world"));
 
-        REQUIRE( test == "world" );
-        REQUIRE( i == 4 );
+        REQUIRE(test == "world");
+        REQUIRE(i == 3);
     }
 
 
