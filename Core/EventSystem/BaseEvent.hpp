@@ -11,7 +11,7 @@ public:
 
     using EventType = const char *;
 
-    virtual EventType type() const = 0;
+    virtual EventType getType() const = 0;
 };
 
 

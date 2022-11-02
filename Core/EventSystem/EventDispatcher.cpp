@@ -11,7 +11,7 @@ void EventDispatcher::subscribe(const BaseEvent::EventType &descriptor, EventDis
 }
 
 void EventDispatcher::post(const BaseEvent &event) const {
-    auto type = event.type();
+    auto type = event.getType();
 
     // Ignore events for which we do not have an observer (yet).
     if (_observers.find(type) == _observers.end())
