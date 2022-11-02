@@ -1,4 +1,4 @@
-![example workflow](https://github.com/Kolterdyx/CementEngine/.github/workflows/cmake.yml/badge.svg)
+[![Tests](https://github.com/Kolterdyx/CementEngine/actions/workflows/cmake.yml/badge.svg)](https://github.com/Kolterdyx/CementEngine/actions/workflows/cmake.yml)
 
 # Cement Engine
 
