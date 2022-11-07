@@ -14,3 +14,24 @@ but currently only officially supports Linux.
 
 * 2D rendering
 * Entity Component System
+
+
+## Building
+
+### Configure
+```bash
+cmake -B ./build -DCMAKE_BUILD_TYPE=Debug
+```
+
+### Compile
+
+Engine:
+```bash
+cmake --build ./build --config Debug --target CementEngine
+```
+
+Tests:
+```bash
+cmake --build ./build --config Debug --target CementEngineTests
+```
+
