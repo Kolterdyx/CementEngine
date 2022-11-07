@@ -31,9 +31,9 @@ set(TestSources
         test/TestSceneSystem.cpp
 )
 
-add_executable(tests ${TestSources} ${CementSources})
+add_executable(CementEngineTests ${TestSources} ${CementSources})
 
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
 
 add_executable(CementEngine
         main.cpp
