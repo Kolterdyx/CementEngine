@@ -11,11 +11,14 @@
 #include <cassert>
 #include <array>
 #include <unordered_map>
+#include <memory>
+#include <set>
 
 #define MAX_ENTITIES 1000000
 #define MAX_COMPONENTS 64
 
 using Entity = size_t;
+using ComponentType = std::uint8_t;
 using Signature = std::bitset<MAX_COMPONENTS>;
 
 #endif //CEMENTENGINE_GLOBALS_HPP
