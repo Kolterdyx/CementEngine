@@ -11,10 +11,10 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-
 set(CMAKE_CXX_STANDARD 14)
 
 set(CementSources
+        Core/globals.hpp
         Core/EventSystem/EventDispatcher.cpp
         Core/EventSystem/EventDispatcher.hpp
         Core/EventSystem/BaseEvent.hpp
@@ -24,18 +24,25 @@ set(CementSources
         Core/SceneSystem/SceneStateManager.cpp
         Core/SceneSystem/SceneStateManager.hpp
         Core/ComponentSystem/ComponentSystem.hpp
-)
+        Core/ComponentSystem/Components.hpp
+        Core/ComponentSystem/ComponentArray.hpp
+        Core/ComponentSystem/EntityManager.cpp
+        Core/ComponentSystem/EntityManager.hpp
+        Core/EntitySystems/MovementSystem.cpp
+        Core/EntitySystems/MovementSystem.hpp
+        )
 
 set(TestSources
         test/TestEventSystem.cpp
         test/TestSceneSystem.cpp
-)
-
-add_executable(CementEngineTests ${TestSources} ${CementSources})
-
-target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
+        test/TestEntityComponentSystem.cpp
+        )
 
 add_executable(CementEngine
         main.cpp
         ${CementSources}
-)
+        )
+
+add_executable(CementEngineTests ${TestSources} ${CementSources})
+
+target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
