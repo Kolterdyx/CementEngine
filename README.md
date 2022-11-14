@@ -9,13 +9,17 @@ but currently only officially supports Linux.
 ## Features
 
 * Event System (no thread-safe)
+
+## WIP
+
 * Entity Component System
+* Scene System
 
 ## TODO
 
 * 2D rendering
-* Entity Component System
-
+* 2D physics
+* UI layout
 
 ## Building
 
