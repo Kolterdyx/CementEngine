@@ -8,7 +8,8 @@ but currently only officially supports Linux.
 
 ## Features
 
-* Event System
+* Event System (no thread-safe)
+* Entity Component System
 
 ## TODO
 
