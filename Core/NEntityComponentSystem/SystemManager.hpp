@@ -16,9 +16,9 @@ namespace ecs {
         std::shared_ptr<T> registerSystem() {
             const char *typeName = typeid(T).name();
 
-            assert(systems.find(typeName) == systems.end() && "Registering system more than once");
+            CEMENT_ASSERT(systems.find(typeName) == systems.end(), "Registering system more than once");
 
-            // Create a pointer to the system and return it so it can be used externally
+            // Create a pointer to the system and return it, so it can be used externally
             auto system = std::make_shared<T>();
             systems.insert({typeName, system});
             return system;
@@ -28,7 +28,7 @@ namespace ecs {
         void setSignature(Signature signature) {
             const char *typeName = typeid(T).name();
 
-            assert(systems.find(typeName) != systems.end() && "IEntitySystem used before registered");
+            CEMENT_ASSERT(systems.find(typeName) != systems.end(), "IEntitySystem used before registered");
 
             // Set the signature for this system
             signatures.insert({typeName, signature});

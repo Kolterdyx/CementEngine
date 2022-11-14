@@ -84,6 +84,7 @@ namespace ecs {
 
     template<typename T>
     T& EntityComponentSystem::getComponent(Entity entity) {
+        CEMENT_ASSERT(entityManager->getSignature(entity)[componentManager->getComponentType<T>()] == true, "Entity does not have given component");
         return componentManager->getComponent<T>(entity);
     }
 

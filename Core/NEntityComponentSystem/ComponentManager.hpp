@@ -22,7 +22,7 @@ namespace ecs {
         std::shared_ptr<ComponentArray<T>> getComponentArray() {
             const char *typeName = typeid(T).name();
 
-            assert(componentTypes.find(typeName) != componentTypes.end() && "Component not registered before use");
+            CEMENT_ASSERT(componentTypes.find(typeName) != componentTypes.end(), "Component not registered before use");
 
             return std::static_pointer_cast<ComponentArray<T>>(componentArrays[typeName]);
         }
@@ -57,7 +57,7 @@ namespace ecs {
     void ComponentManager::registerComponent() {
         const char *typeName = typeid(T).name();
 
-        assert(componentTypes.find(typeName) == componentTypes.end() && "Registering component type more than once");
+        CEMENT_ASSERT(componentTypes.find(typeName) == componentTypes.end(), "Registering component type more than once");
 
         componentTypes.insert({typeName, nextComponentType});
 
@@ -70,7 +70,7 @@ namespace ecs {
     ComponentType ComponentManager::getComponentType() {
         const char *typeName = typeid(T).name();
 
-        assert(componentTypes.find(typeName) != componentTypes.end() && "Component not registered before use");
+        CEMENT_ASSERT(componentTypes.find(typeName) != componentTypes.end(), "Component not registered before use");
 
         return componentTypes[typeName];
     }

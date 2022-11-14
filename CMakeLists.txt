@@ -23,15 +23,15 @@ set(CementSources
         Core/SceneSystem/BaseScene.hpp
         Core/SceneSystem/SceneStateManager.cpp
         Core/SceneSystem/SceneStateManager.hpp
-        Core/EntityComponentSystem/ComponentSystem.hpp
-        Core/EntityComponentSystem/ComponentArray.hpp
-        Core/EntityComponentSystem/EntityManager.cpp
-        Core/EntityComponentSystem/EntityManager.hpp
-        Core/EntityComponentSystem/ComponentManager.hpp
-        Core/EntityComponentSystem/EntityComponentSystem.cpp
-        Core/EntityComponentSystem/EntityComponentSystem.hpp
-        Core/EntityComponentSystem/SystemManager.cpp
-        Core/EntityComponentSystem/SystemManager.hpp
+        Core/NEntityComponentSystem/ComponentSystem.hpp
+        Core/NEntityComponentSystem/ComponentArray.hpp
+        Core/NEntityComponentSystem/EntityManager.cpp
+        Core/NEntityComponentSystem/EntityManager.hpp
+        Core/NEntityComponentSystem/ComponentManager.hpp
+        Core/NEntityComponentSystem/EntityComponentSystem.cpp
+        Core/NEntityComponentSystem/EntityComponentSystem.hpp
+        Core/NEntityComponentSystem/SystemManager.cpp
+        Core/NEntityComponentSystem/SystemManager.hpp
         Core/EntitySystems/MovementSystem.cpp
         Core/EntitySystems/MovementSystem.hpp
         Core/EntitySystems/IEntitySystem.hpp

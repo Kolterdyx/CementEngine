@@ -37,7 +37,7 @@ namespace ecs {
 
     template<typename T>
     void ComponentArray<T>::insertData(Entity entity, T component) {
-        assert(entityToIndexMap.find(entity) == entityToIndexMap.end() && "Component added to same entity more than once");
+        CEMENT_ASSERT(entityToIndexMap.find(entity) == entityToIndexMap.end(), "Component added to same entity more than once");
 
         size_t newIndex = size;
         entityToIndexMap[entity] = newIndex;
@@ -49,7 +49,7 @@ namespace ecs {
 
     template<typename T>
     void ComponentArray<T>::removeData(Entity entity) {
-        assert(entityToIndexMap.find(entity) != entityToIndexMap.end() && "Removing non-existent component.");
+        CEMENT_ASSERT(entityToIndexMap.find(entity) != entityToIndexMap.end(), "Removing non-existent component.");
 
         size_t indexOfRemovedEntity = entityToIndexMap[entity];
         size_t indexOfLastElement = size - 1;

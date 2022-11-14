@@ -13,7 +13,7 @@ namespace ecs {
     }
 
     Entity EntityManager::createEntity() {
-        assert(livingEntityCount < MAX_ENTITIES && "Too many entities in existence.");
+        CEMENT_ASSERT(livingEntityCount < MAX_ENTITIES, "Too many entities in existence.");
 
         Entity id = availableEntities.front();
         availableEntities.pop();
@@ -22,20 +22,20 @@ namespace ecs {
     }
 
     void EntityManager::destroyEntity(Entity entity) {
-        assert(entity < MAX_ENTITIES && "Entity ID out of range");
+        CEMENT_ASSERT(entity < MAX_ENTITIES, "Entity ID out of range");
         signatures[entity].reset();
         availableEntities.push(entity);
         livingEntityCount--;
     }
 
     void EntityManager::setSignature(Entity entity, Signature signature) {
-        assert(entity < MAX_ENTITIES && "Entity ID out of range");
+        CEMENT_ASSERT(entity < MAX_ENTITIES, "Entity ID out of range");
 
         signatures[entity] = signature;
     }
 
     Signature EntityManager::getSignature(Entity entity) {
-        assert(entity < MAX_ENTITIES && "Entity ID out of range");
+        CEMENT_ASSERT(entity < MAX_ENTITIES, "Entity ID out of range");
         return signatures[entity];
     }
 }

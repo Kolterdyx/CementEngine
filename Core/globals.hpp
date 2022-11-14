@@ -13,12 +13,31 @@
 #include <unordered_map>
 #include <memory>
 #include <set>
+#include <utility>
+#include <stdexcept>
+#include <regex>
 
 #define MAX_ENTITIES 1000000
 #define MAX_COMPONENTS 64
 
-#define CEMENT_ASSERT(expr) (static_cast <bool> (expr) ? void (0) : throw std::runtime_error(#expr, __FILE__, __LINE__, __ASSERT_FUNCTION))
-CEMENT_ASSERT(1==1 && "");
+
+class AssertionFail : public std::runtime_error {
+private:
+    std::string msg;
+public:
+    AssertionFail(std::string expr, std::string text, std::string file, int line, std::string func) : runtime_error(""){
+        msg += text;
+        msg += std::string("\n    ");
+        msg += file + std::string(":") + std::to_string(line) + std::string("\n    ") + func + std::string("\n    ") + expr;
+    }
+
+    const char *what() const noexcept {
+        return msg.c_str();
+    }
+};
+
+#define CEMENT_ASSERT(expr, text) (static_cast <bool> (expr) ? void (0) : throw AssertionFail(#expr, text, __FILE__, __LINE__, __ASSERT_FUNCTION))
+
 using Entity = size_t;
 using ComponentType = std::uint8_t;
 using Signature = std::bitset<MAX_COMPONENTS>;
