@@ -42,8 +42,8 @@ jobs:
     - name: Build
       working-directory: ${{github.workspace}}
       # Build your program with the given configuration
-      run: cmake --build ./build --config Debug --target tests
+      run: cmake --build ./build --config Debug --target CementEngineTests
 
     - name: Test
       working-directory: ${{github.workspace}}
-      run: ./build/tests
+      run: ./build/CementEngineTests
