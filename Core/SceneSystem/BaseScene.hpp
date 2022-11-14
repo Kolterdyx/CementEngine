@@ -19,7 +19,7 @@ namespace Cement {
 
         virtual void load() {};
 
-        unsigned int getId() const;
+        [[nodiscard]] unsigned int getId() const;
 
         BaseScene();
 
