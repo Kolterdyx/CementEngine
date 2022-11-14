@@ -6,7 +6,7 @@
 #define CEMENTENGINE_SYSTEMMANAGER_HPP
 
 #include "../globals.hpp"
-#include "../EntitySystems/IEntitySystem.hpp"
+#include "IEntitySystem.hpp"
 
 namespace Cement::ecs {
 

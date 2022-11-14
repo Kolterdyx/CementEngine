@@ -7,7 +7,7 @@
 
 #include "../globals.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
     class IEntitySystem {
     public:
         std::set<Entity> entities;
