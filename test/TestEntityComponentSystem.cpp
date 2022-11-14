@@ -60,12 +60,12 @@ TEST_CASE("Test the Entity Component System", "[Entity Component System]") {
         ECS.registerComponent<TestComp2>();
 
         SECTION("Create one entity") {
-            Entity entity = ECS.createEntity();
+            ecs::Entity entity = ECS.createEntity();
             REQUIRE(entity > 0);
         }
 
         SECTION("Create multiple entities") {
-            Entity entities[10];
+            ecs::Entity entities[10];
             for (unsigned long & entity : entities) {
                 entity = ECS.createEntity();
             }
@@ -75,9 +75,9 @@ TEST_CASE("Test the Entity Component System", "[Entity Component System]") {
         }
 
         SECTION("Add components to entities") {
-            Entity entity1 = ECS.createEntity();
-            Entity entity2 = ECS.createEntity();
-            Entity entity3 = ECS.createEntity();
+            ecs::Entity entity1 = ECS.createEntity();
+            ecs::Entity entity2 = ECS.createEntity();
+            ecs::Entity entity3 = ECS.createEntity();
             SECTION("Add one component") {
                 bool fail = false;
                 try  {
