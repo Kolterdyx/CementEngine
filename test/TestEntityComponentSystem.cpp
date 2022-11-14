@@ -2,8 +2,10 @@
 // Created by kolterdyx on 10/11/22.
 //
 
-#include "../Core/EntityComponentSystem/EntityComponentSystem.hpp"
+#include "../Core/NEntityComponentSystem/EntityComponentSystem.hpp"
 #include "catch2/catch_test_macros.hpp"
+
+using namespace Cement;
 
 TEST_CASE("Test the Entity Component System", "[Entity Component System]") {
     ecs::EntityComponentSystem ECS;

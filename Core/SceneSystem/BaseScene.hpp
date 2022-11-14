@@ -4,26 +4,28 @@
 
 #include <stdexcept>
 
-class BaseScene {
+namespace Cement {
+    class BaseScene {
 
-private:
-    unsigned int _id;
+    private:
+        unsigned int _id;
 
-public:
-    virtual void onCreate() {};
+    public:
+        virtual void onCreate() {};
 
-    virtual void onDestroy() {};
+        virtual void onDestroy() {};
 
-    virtual void update() {};
+        virtual void update() {};
 
-    virtual void load() {};
+        virtual void load() {};
 
-    unsigned int getId() const;
+        unsigned int getId() const;
 
-    BaseScene();
+        BaseScene();
 
-    explicit BaseScene(unsigned int id);
+        explicit BaseScene(unsigned int id);
 
-};
+    };
+}
 
 #endif //CEMENTENGINE_BASESCENE_HPP

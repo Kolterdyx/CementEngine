@@ -9,27 +9,29 @@
 #include <memory>
 #include "BaseScene.hpp"
 
-class SceneStateManager {
+namespace Cement {
+    class SceneStateManager {
 
-private:
-    std::unordered_map<unsigned int, std::shared_ptr<BaseScene>> _scenes;
+    private:
+        std::unordered_map<unsigned int, std::shared_ptr<BaseScene>> _scenes;
 
-    unsigned int _currentScene;
+        unsigned int _currentScene;
 
-public:
+    public:
 
-    void addScene(const std::shared_ptr<BaseScene> &scene);
+        void addScene(const std::shared_ptr<BaseScene> &scene);
 
-    void removeScene(unsigned int id);
+        void removeScene(unsigned int id);
 
-    void setCurrentScene(unsigned int id);
+        void setCurrentScene(unsigned int id);
 
-    void updateCurrentScene();
+        void updateCurrentScene();
 
-    std::shared_ptr<BaseScene> getCurrentScene();
+        std::shared_ptr<BaseScene> getCurrentScene();
 
-    SceneStateManager();
+        SceneStateManager();
 
-};
+    };
+}
 
 #endif //CEMENTENGINE_SCENESTATEMANAGER_HPP

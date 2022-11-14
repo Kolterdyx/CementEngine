@@ -10,7 +10,7 @@
 #include <array>
 #include "../globals.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
 
     class EntityManager {
     private:

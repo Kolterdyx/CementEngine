@@ -3,18 +3,19 @@
 //
 #include "BaseScene.hpp"
 
-unsigned int BaseScene::getId() const {
-    return _id;
-}
-
-BaseScene::BaseScene(unsigned int id) {
-    if (id == 0) {
-        throw std::invalid_argument("Scene id cannot be 0");
+namespace Cement {
+    unsigned int BaseScene::getId() const {
+        return _id;
     }
-    this->_id = id;
-}
 
-BaseScene::BaseScene() {
-    _id = 0;
-}
+    BaseScene::BaseScene(unsigned int id) {
+        if (id == 0) {
+            throw std::invalid_argument("Scene id cannot be 0");
+        }
+        this->_id = id;
+    }
 
+    BaseScene::BaseScene() {
+        _id = 0;
+    }
+}

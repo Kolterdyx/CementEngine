@@ -4,7 +4,7 @@
 
 #include "EntityComponentSystem.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
     EntityComponentSystem::EntityComponentSystem() {
         componentManager = std::make_unique<ComponentManager>();
         entityManager = std::make_unique<EntityManager>();

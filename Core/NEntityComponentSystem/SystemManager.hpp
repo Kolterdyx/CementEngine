@@ -8,7 +8,7 @@
 #include "../globals.hpp"
 #include "../EntitySystems/IEntitySystem.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
 
     class SystemManager {
     public:

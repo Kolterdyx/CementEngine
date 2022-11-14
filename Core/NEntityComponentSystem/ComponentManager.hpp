@@ -8,7 +8,7 @@
 #include "../globals.hpp"
 #include "ComponentArray.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
     class ComponentManager {
 
     private:

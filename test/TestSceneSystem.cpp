@@ -1,6 +1,7 @@
 #include "../Core/SceneSystem/SceneSystem.hpp"
 #include "catch2/catch_test_macros.hpp"
 
+using namespace Cement;
 
 TEST_CASE("Test the Scene System", "[Scene System]") {
 

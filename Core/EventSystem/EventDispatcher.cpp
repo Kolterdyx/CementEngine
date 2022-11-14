@@ -6,20 +6,22 @@
 #include <iostream>
 #include "EventDispatcher.hpp"
 
-void EventDispatcher::subscribe(const BaseEvent::EventType &descriptor, EventDispatcher::SlotType &&slot) {
-    _observers[descriptor].push_back(slot);
-}
+namespace Cement {
+    void EventDispatcher::subscribe(const BaseEvent::EventType &descriptor, EventDispatcher::SlotType &&slot) {
+        _observers[descriptor].push_back(slot);
+    }
 
-void EventDispatcher::post(const BaseEvent &event) const {
-    auto type = event.getType();
+    void EventDispatcher::post(const BaseEvent &event) const {
+        auto type = event.getType();
 
-    // Ignore events for which we do not have an observer (yet).
-    if (_observers.find(type) == _observers.end())
-        return;
+        // Ignore events for which we do not have an observer (yet).
+        if (_observers.find(type) == _observers.end())
+            return;
 
-    auto &&observers = _observers.at(type);
+        auto &&observers = _observers.at(type);
 
-    for (auto &&observer: observers)
-        observer(event);
+        for (auto &&observer: observers)
+            observer(event);
 
+    }
 }

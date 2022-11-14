@@ -6,6 +6,8 @@ int i = 0;
 
 std::string test;
 
+using namespace Cement;
+
 class TestEvent1 : public BaseEvent {
 public:
     constexpr static const EventType type = "Test 1";

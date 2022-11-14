@@ -6,7 +6,7 @@
 #define CEMENTENGINE_COMPONENTARRAY_HPP
 
 #include "../globals.hpp"
-namespace ecs {
+namespace Cement::ecs {
     class IComponentArray
     {
     public:

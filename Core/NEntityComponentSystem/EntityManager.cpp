@@ -4,7 +4,7 @@
 
 #include "EntityManager.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
 
     EntityManager::EntityManager() {
         for (Entity entity = 0; entity < MAX_ENTITIES; ++entity) {

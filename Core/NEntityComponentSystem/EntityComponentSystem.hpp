@@ -10,7 +10,7 @@
 #include "EntityManager.hpp"
 #include "SystemManager.hpp"
 
-namespace ecs {
+namespace Cement::ecs {
 
     class EntityComponentSystem {
     private:
@@ -36,7 +36,7 @@ namespace ecs {
         void removeComponent(Entity entity);
 
         template<typename T>
-        T& getComponent(Entity entity);
+        T &getComponent(Entity entity);
 
         template<typename T>
         ComponentType getComponentType();
@@ -83,8 +83,9 @@ namespace ecs {
     }
 
     template<typename T>
-    T& EntityComponentSystem::getComponent(Entity entity) {
-        CEMENT_ASSERT(entityManager->getSignature(entity)[componentManager->getComponentType<T>()] == true, "Entity does not have given component");
+    T &EntityComponentSystem::getComponent(Entity entity) {
+        CEMENT_ASSERT(entityManager->getSignature(entity)[componentManager->getComponentType<T>()] == true,
+                      "Entity does not have given component");
         return componentManager->getComponent<T>(entity);
     }
 
@@ -98,5 +99,6 @@ namespace ecs {
         systemManager->setSignature<T>(signature);
     }
 } // ecs
+
 
 #endif //CEMENTENGINE_ENTITYCOMPONENTSYSTEM_HPP
