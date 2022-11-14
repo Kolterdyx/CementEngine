@@ -37,8 +37,6 @@ set(CementSources
         Core/NEntityComponentSystem/EntityComponentSystem.cpp
         Core/NEntityComponentSystem/EntityComponentSystem.hpp
         Core/NEntityComponentSystem/SystemManager.hpp
-        Core/EntitySystems/MovementSystem.cpp
-        Core/EntitySystems/MovementSystem.hpp
         Core/NEntityComponentSystem/IEntitySystem.hpp
         Core/EntityComponentSystem/EntityComponenSystem.cpp
         Core/EntityComponentSystem/EntityComponenSystem.hpp
