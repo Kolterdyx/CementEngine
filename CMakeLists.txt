@@ -4,12 +4,19 @@ project(CementEngine)
 Include(FetchContent)
 
 FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.0.1 # or a later release
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG        v3.0.1
+)
+
+FetchContent_Declare(
+        EnTT
+        GIT_REPOSITORY https://github.com/skypjack/entt.git
+        GIT_TAG        v3.11.0
 )
 
 FetchContent_MakeAvailable(Catch2)
+FetchContent_MakeAvailable(EnTT)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -35,7 +42,7 @@ set(CementSources
         Core/EntitySystems/MovementSystem.cpp
         Core/EntitySystems/MovementSystem.hpp
         Core/EntitySystems/IEntitySystem.hpp
-        )
+        Core/EntityComponentSystem/EntityComponenSystem.cpp Core/EntityComponentSystem/EntityComponenSystem.hpp)
 
 set(TestSources
         test/TestEventSystem.cpp
@@ -51,3 +58,5 @@ add_executable(CementEngine
 add_executable(CementEngineTests ${TestSources} ${CementSources})
 
 target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(CementEngine PRIVATE EnTT::EnTT)
+target_link_libraries(CementEngineTests PRIVATE EnTT::EnTT)
