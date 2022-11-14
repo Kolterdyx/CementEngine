@@ -1,4 +1,4 @@
-# Catch2
+# Catch2 ([source](https://github.com/catchorg/Catch2))
 
 Boost Software License - Version 1.0 - August 17th, 2003
 
@@ -24,7 +24,7 @@ FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
-# EnTT [source](https://github.com/skypjack/entt)
+# EnTT ([source](https://github.com/skypjack/entt))
 
 The MIT License (MIT)
 
