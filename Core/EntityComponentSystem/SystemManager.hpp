@@ -6,7 +6,7 @@
 #define CEMENTENGINE_SYSTEMMANAGER_HPP
 
 #include "../globals.hpp"
-#include "../EntitySystems/System.hpp"
+#include "../EntitySystems/IEntitySystem.hpp"
 
 namespace ecs {
 
@@ -28,7 +28,7 @@ namespace ecs {
         void setSignature(Signature signature) {
             const char *typeName = typeid(T).name();
 
-            assert(systems.find(typeName) != systems.end() && "System used before registered");
+            assert(systems.find(typeName) != systems.end() && "IEntitySystem used before registered");
 
             // Set the signature for this system
             signatures.insert({typeName, signature});
@@ -67,7 +67,7 @@ namespace ecs {
         std::unordered_map<const char *, Signature> signatures{};
 
         // Map from system type string pointer to a system pointer
-        std::unordered_map<const char *, std::shared_ptr<System>> systems{};
+        std::unordered_map<const char *, std::shared_ptr<IEntitySystem>> systems{};
 
     };
 

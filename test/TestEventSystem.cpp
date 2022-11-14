@@ -39,7 +39,7 @@ void testHandler2(const BaseEvent &e) {
     test = event.msg;
 }
 
-TEST_CASE("Test the Event system", "[Event System]") {
+TEST_CASE("Test the Event system", "[Event IEntitySystem]") {
 
     i = 0;
     test = "";

@@ -8,7 +8,7 @@ namespace ecs {
 
     EntityManager::EntityManager() {
         for (Entity entity = 0; entity < MAX_ENTITIES; ++entity) {
-            availableEntities.push(entity);
+            availableEntities.push(entity + 1);
         }
     }
 

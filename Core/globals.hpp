@@ -17,6 +17,8 @@
 #define MAX_ENTITIES 1000000
 #define MAX_COMPONENTS 64
 
+#define CEMENT_ASSERT(expr) (static_cast <bool> (expr) ? void (0) : throw std::runtime_error(#expr, __FILE__, __LINE__, __ASSERT_FUNCTION))
+CEMENT_ASSERT(1==1 && "");
 using Entity = size_t;
 using ComponentType = std::uint8_t;
 using Signature = std::bitset<MAX_COMPONENTS>;

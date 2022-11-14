@@ -2,7 +2,7 @@
 #include "catch2/catch_test_macros.hpp"
 
 
-TEST_CASE("Test the Scene System", "[Scene System]") {
+TEST_CASE("Test the Scene IEntitySystem", "[Scene IEntitySystem]") {
 
     class TestScene : public BaseScene {
     public:

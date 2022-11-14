@@ -34,8 +34,7 @@ set(CementSources
         Core/EntityComponentSystem/SystemManager.hpp
         Core/EntitySystems/MovementSystem.cpp
         Core/EntitySystems/MovementSystem.hpp
-        Core/EntitySystems/System.cpp
-        Core/EntitySystems/System.hpp
+        Core/EntitySystems/IEntitySystem.hpp
         )
 
 set(TestSources

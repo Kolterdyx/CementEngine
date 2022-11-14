@@ -8,12 +8,12 @@ but currently only officially supports Linux.
 
 ## Features
 
-* Event System
+* Event IEntitySystem
 
 ## TODO
 
 * 2D rendering
-* Entity Component System
+* Entity Component IEntitySystem
 
 
 ## Building

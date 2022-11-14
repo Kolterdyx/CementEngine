@@ -43,8 +43,14 @@ namespace ecs {
         template<typename T>
         T &getComponent(Entity entity);
 
-        void entityDestroyed(Entity entity);
+        void entityDestroyed(Entity entity) {
+            for (auto const& pair : componentArrays)
+            {
+                auto const& component = pair.second;
 
+                component->entityDestroyed(entity);
+            }
+        };
     };
 
     template<typename T>
@@ -82,16 +88,6 @@ namespace ecs {
     template<typename T>
     T &ComponentManager::getComponent(Entity entity) {
         return getComponentArray<T>()->getData(entity);
-    }
-
-    void ComponentManager::entityDestroyed(Entity entity) {
-        for (auto const& pair : componentArrays)
-        {
-            auto const& component = pair.second;
-
-            component->entityDestroyed(entity);
-        }
-
     }
 }
 
