@@ -31,13 +31,13 @@ jobs:
       working-directory: ${{github.workspace}}
       run: cmake -B ./build -DCMAKE_BUILD_TYPE=Debug
     
-    - name: Cache
-      uses: actions/cache@v3.0.11
-      with:
-        # A list of files, directories, and wildcard patterns to cache and restore
-        path: ${{github.workspace}}/build
-        # An explicit key for restoring and saving the cache
-        key: ${{ runner.os }}-build
+#    - name: Cache
+#      uses: actions/cache@v3.0.11
+#      with:
+#        # A list of files, directories, and wildcard patterns to cache and restore
+#        path: ${{github.workspace}}/build
+#        # An explicit key for restoring and saving the cache
+#        key: ${{ runner.os }}-build
 
     - name: Build
       working-directory: ${{github.workspace}}
