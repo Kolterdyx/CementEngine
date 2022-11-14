@@ -56,6 +56,6 @@ add_executable(CementEngine
 
 add_executable(CementEngineTests ${TestSources} ${CementSources})
 
-target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(CementEngine PRIVATE EnTT::EnTT)
+target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(CementEngineTests PRIVATE EnTT::EnTT)
