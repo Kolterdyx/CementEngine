@@ -35,3 +35,7 @@ Tests:
 cmake --build ./build --config Debug --target CementEngineTests
 ```
 
+## Licensing and Credits
+
+* [License](LICENSE.txt)
+* [Credits](CREDITS.md)
