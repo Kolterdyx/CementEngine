@@ -22,6 +22,7 @@ but currently only officially supports Linux.
 * UI layout
 * Serialization
 * Scene/Entity Editor
+* Thread-safe Event System
 
 ## Building
 
