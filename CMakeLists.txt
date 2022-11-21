@@ -30,20 +30,11 @@ set(CementSources
         Core/SceneSystem/BaseScene.hpp
         Core/SceneSystem/SceneStateManager.cpp
         Core/SceneSystem/SceneStateManager.hpp
-        Core/NEntityComponentSystem/ComponentArray.hpp
-        Core/NEntityComponentSystem/EntityManager.cpp
-        Core/NEntityComponentSystem/EntityManager.hpp
-        Core/NEntityComponentSystem/ComponentManager.hpp
-        Core/NEntityComponentSystem/EntityComponentSystem.cpp
-        Core/NEntityComponentSystem/EntityComponentSystem.hpp
-        Core/NEntityComponentSystem/SystemManager.hpp
-        Core/NEntityComponentSystem/IEntitySystem.hpp
         Core/EntityComponentSystem/Entity.hpp)
 
 set(TestSources
         test/TestEventSystem.cpp
         test/TestSceneSystem.cpp
-        test/TestEntityComponentSystem.cpp
         )
 
 add_executable(CementEngine
