@@ -8,11 +8,11 @@ but currently only officially supports Linux.
 
 ## Features
 
-* Event System (no thread-safe)
+* Event System (not thread-safe)
 
 ## WIP
 
-* Entity Component System
+* Integrating EnTT
 * Scene System
 
 ## TODO
@@ -20,6 +20,8 @@ but currently only officially supports Linux.
 * 2D rendering
 * 2D physics
 * UI layout
+* Serialization
+* Scene/Entity Editor
 
 ## Building
 
