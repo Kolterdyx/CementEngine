@@ -36,8 +36,10 @@ namespace Cement {
 
     template<typename T, typename... Args>
     T BaseScene::addEntity(Args... args) {
-        T entity = T(std::make_shared<entt::registry>(entityRegistry), args...);
-        CEMENT_ASSERT(dynamic_cast<Entity *>(&entity) != nullptr, "Class passed is does not inherit from Cement::Entity");
+        T entity = T(entityRegistry);
+        entity.init(args...);
+        CEMENT_ASSERT(dynamic_cast<Entity *>(&entity) != nullptr,
+                      "Class passed is does not inherit from Cement::Entity");
         entities.push_back(entity);
         return entity;
     }

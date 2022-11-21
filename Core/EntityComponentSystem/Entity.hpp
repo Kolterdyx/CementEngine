@@ -19,10 +19,11 @@ namespace Cement {
     public:
         Entity() = delete;
 
-
         explicit Entity(entt::registry &m_Registry) : m_Registry(m_Registry) {
             entityHandler = m_Registry.create();
         }
+
+        virtual void init() = 0;
 
         template<typename T>
         void addComponent();
