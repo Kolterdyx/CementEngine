@@ -10,7 +10,7 @@ namespace Cement {
     class BaseScene {
 
     private:
-        unsigned int _id;
+        uint32_t _id;
         std::vector<Entity> entities;
         entt::registry entityRegistry;
 
@@ -23,11 +23,11 @@ namespace Cement {
 
         virtual void load() {};
 
-        [[nodiscard]] unsigned int getId() const;
+        [[nodiscard]] uint32_t getId() const;
 
         BaseScene();
 
-        explicit BaseScene(unsigned int id);
+        explicit BaseScene(uint32_t id);
 
         template<typename T, typename... Args>
         T addEntity(Args... args);

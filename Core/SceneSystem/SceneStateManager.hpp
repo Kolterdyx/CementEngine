@@ -13,17 +13,17 @@ namespace Cement {
     class SceneStateManager {
 
     private:
-        std::unordered_map<unsigned int, std::shared_ptr<BaseScene>> _scenes;
+        std::unordered_map<uint32_t, std::shared_ptr<BaseScene>> _scenes;
 
-        unsigned int _currentScene;
+        uint32_t _currentScene;
 
     public:
 
         void addScene(const std::shared_ptr<BaseScene> &scene);
 
-        void removeScene(unsigned int id);
+        void removeScene(uint32_t id);
 
-        void setCurrentScene(unsigned int id);
+        void setCurrentScene(uint32_t id);
 
         void updateCurrentScene();
 
