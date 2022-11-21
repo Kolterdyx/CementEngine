@@ -12,7 +12,7 @@ but currently only officially supports Linux.
 
 ## WIP
 
-* Integrating EnTT
+* Integrate EnTT
 * Scene System
 
 ## TODO
