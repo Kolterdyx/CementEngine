@@ -20,7 +20,7 @@ FetchContent_MakeAvailable(EnTT)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CementSources
+set(CementCoreSources
         Core/globals.hpp
         Core/EventSystem/EventDispatcher.cpp
         Core/EventSystem/EventDispatcher.hpp
@@ -39,7 +39,7 @@ set(TestSources
 
 add_executable(CementEngine
         main.cpp
-        ${CementSources}
+        ${CementCoreSources}
         )
 
 add_executable(CementEngineTests ${TestSources} ${CementSources})
