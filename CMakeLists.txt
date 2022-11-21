@@ -38,9 +38,6 @@ set(CementSources
         Core/NEntityComponentSystem/EntityComponentSystem.hpp
         Core/NEntityComponentSystem/SystemManager.hpp
         Core/NEntityComponentSystem/IEntitySystem.hpp
-        Core/EntityComponentSystem/EntityComponenSystem.cpp
-        Core/EntityComponentSystem/EntityComponenSystem.hpp
-        Core/EntityComponentSystem/Entity.cpp
         Core/EntityComponentSystem/Entity.hpp)
 
 set(TestSources
