@@ -4,7 +4,7 @@
 #include "SceneStateManager.hpp"
 
 namespace Cement {
-    void SceneStateManager::addScene(const std::shared_ptr<BaseScene> &scene) {
+    void SceneStateManager::addScene(const std::shared_ptr<Scene> &scene) {
         if (_scenes.empty()) {
             _currentScene = scene->getId();
         }
@@ -29,7 +29,7 @@ namespace Cement {
             throw std::invalid_argument("Scene id cannot be 0");
     }
 
-    std::shared_ptr<BaseScene> SceneStateManager::getCurrentScene() {
+    std::shared_ptr<Scene> SceneStateManager::getCurrentScene() {
         if (_scenes.find(_currentScene) != _scenes.end()) {
             return _scenes[_currentScene];
         }

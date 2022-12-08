@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.23)
-project(CementEngine)
+set(PROJECT_NAME CementEngine)
+set(PROJECT_TEST_NAME ${PROJECT_NAME}Test)
+
+project(${PROJECT_NAME})
+
 
 Include(FetchContent)
 
@@ -26,8 +30,8 @@ set(CementCoreSources
         Core/EventSystem/EventDispatcher.hpp
         Core/EventSystem/BaseEvent.hpp
         Core/SceneSystem/SceneSystem.hpp
-        Core/SceneSystem/BaseScene.cpp
-        Core/SceneSystem/BaseScene.hpp
+        Core/SceneSystem/Scene.cpp
+        Core/SceneSystem/Scene.hpp
         Core/SceneSystem/SceneStateManager.cpp
         Core/SceneSystem/SceneStateManager.hpp
         Core/EntityComponentSystem/Entity.hpp)
@@ -37,13 +41,16 @@ set(TestSources
         test/TestSceneSystem.cpp
         )
 
-add_executable(CementEngine
+add_executable(${PROJECT_NAME}
         main.cpp
         ${CementCoreSources}
         )
 
-add_executable(CementEngineTests ${TestSources} ${CementSources})
+add_executable(${PROJECT_TEST_NAME} ${CementCoreSources} ${TestSources})
 
-target_link_libraries(CementEngine PRIVATE EnTT::EnTT)
-target_link_libraries(CementEngineTests PRIVATE Catch2::Catch2WithMain)
-target_link_libraries(CementEngineTests PRIVATE EnTT::EnTT)
+# Main executable linked libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
+
+# Test linked libraries
+target_link_libraries(${PROJECT_TEST_NAME} PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(${PROJECT_TEST_NAME} PRIVATE EnTT::EnTT)

@@ -1,13 +1,13 @@
 
-#ifndef CEMENTENGINE_BASESCENE_HPP
-#define CEMENTENGINE_BASESCENE_HPP
+#ifndef CEMENTENGINE_SCENE_HPP
+#define CEMENTENGINE_SCENE_HPP
 
 #include <stdexcept>
 #include <vector>
 #include "../EntityComponentSystem/Entity.hpp"
 
 namespace Cement {
-    class BaseScene {
+    class Scene {
 
     private:
         uint32_t _id;
@@ -25,24 +25,26 @@ namespace Cement {
 
         [[nodiscard]] uint32_t getId() const;
 
-        BaseScene();
+        Scene();
 
-        explicit BaseScene(uint32_t id);
+        explicit Scene(uint32_t id);
 
         template<typename T, typename... Args>
         T addEntity(Args... args);
 
+        void removeEntity(entt::entity entity);
+
     };
 
     template<typename T, typename... Args>
-    T BaseScene::addEntity(Args... args) {
-        T entity = T(entityRegistry);
+    T Scene::addEntity(Args... args) {
+        T entity(entityRegistry);
         entity.init(args...);
         CEMENT_ASSERT(dynamic_cast<Entity *>(&entity) != nullptr,
                       "Class passed is does not inherit from Cement::Entity");
-        entities.push_back(entity);
+        entities.emplace_back(entity);
         return entity;
     }
 }
 
-#endif //CEMENTENGINE_BASESCENE_HPP
+#endif //CEMENTENGINE_SCENE_HPP
