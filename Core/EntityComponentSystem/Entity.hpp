@@ -23,6 +23,8 @@ namespace Cement {
             entityHandler = m_Registry.create();
         }
 
+        entt::entity getEntityHandler() const;
+
         virtual void init() = 0;
 
         template<typename T>
@@ -42,6 +44,10 @@ namespace Cement {
         }
 
     };
+
+    entt::entity Entity::getEntityHandler() const {
+        return entityHandler;
+    }
 
     template<typename T>
     void Entity::addComponent() {

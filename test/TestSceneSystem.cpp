@@ -5,11 +5,11 @@ using namespace Cement;
 
 TEST_CASE("Test the Scene System", "[Scene System]") {
 
-    class TestScene : public BaseScene {
+    class TestScene : public Scene {
     public:
         int n;
 
-        TestScene(unsigned int i) : BaseScene(i) {
+        TestScene(unsigned int i) : Scene(i) {
             n = 0;
         }
 
@@ -26,18 +26,18 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
 
     SECTION("Test basic scene creation") {
         SceneStateManager manager;
-        std::shared_ptr<BaseScene> scene = std::make_shared<TestScene>(1);
+        std::shared_ptr<Scene> scene = std::make_shared<TestScene>(1);
         manager.addScene(scene);
-        std::shared_ptr<BaseScene> cScene = manager.getCurrentScene();
+        std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
         REQUIRE(cScene->getId() == 1);
     }
 
     SECTION("Test scene removal") {
         SceneStateManager manager;
-        std::shared_ptr<BaseScene> scene = std::make_shared<TestScene>(1);
+        std::shared_ptr<Scene> scene = std::make_shared<TestScene>(1);
         manager.addScene(scene);
-        std::shared_ptr<BaseScene> cScene = manager.getCurrentScene();
+        std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
         REQUIRE(cScene->getId() == 1);
         manager.removeScene(1);
@@ -47,11 +47,11 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
 
     SECTION("Test scene switching") {
         SceneStateManager manager;
-        std::shared_ptr<BaseScene> scene1 = std::make_shared<TestScene>(1);
-        std::shared_ptr<BaseScene> scene2 = std::make_shared<TestScene>(2);
+        std::shared_ptr<Scene> scene1 = std::make_shared<TestScene>(1);
+        std::shared_ptr<Scene> scene2 = std::make_shared<TestScene>(2);
         manager.addScene(scene1);
         manager.addScene(scene2);
-        std::shared_ptr<BaseScene> cScene = manager.getCurrentScene();
+        std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
         REQUIRE(cScene->getId() == 1);
         manager.setCurrentScene(2);
@@ -62,9 +62,9 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
 
     SECTION("Test scene update") {
         SceneStateManager manager;
-        std::shared_ptr<BaseScene> scene = std::make_shared<TestScene>(1);
+        std::shared_ptr<Scene> scene = std::make_shared<TestScene>(1);
         manager.addScene(scene);
-        std::shared_ptr<BaseScene> cScene = manager.getCurrentScene();
+        std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
         REQUIRE(cScene->getId() == 1);
         REQUIRE(((TestScene *) cScene.get())->n == 0);
@@ -76,11 +76,11 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
 
     SECTION("Test multiple scene update") {
         SceneStateManager manager;
-        std::shared_ptr<BaseScene> scene1 = std::make_shared<TestScene>(1);
-        std::shared_ptr<BaseScene> scene2 = std::make_shared<TestScene>(2);
+        std::shared_ptr<Scene> scene1 = std::make_shared<TestScene>(1);
+        std::shared_ptr<Scene> scene2 = std::make_shared<TestScene>(2);
         manager.addScene(scene1);
         manager.addScene(scene2);
-        std::shared_ptr<BaseScene> cScene = manager.getCurrentScene();
+        std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
         REQUIRE(cScene->getId() == 1);
         REQUIRE(((TestScene *) cScene.get())->n == 0);
