@@ -27,12 +27,11 @@ set(CMAKE_CXX_STANDARD 14)
 set(CementCoreSources
         Core/globals.hpp
         Core/EventSystem/Event.hpp
-        Core/SceneSystem/SceneSystem.hpp
         Core/SceneSystem/Scene.cpp
         Core/SceneSystem/Scene.hpp
         Core/SceneSystem/SceneStateManager.cpp
         Core/SceneSystem/SceneStateManager.hpp
-        Core/EntityComponentSystem/Entity.hpp)
+        Core/EntityComponentSystem/Entity.hpp Core/UUID/UUID.hpp Core/EntityComponentSystem/Entity.tpp Core/EntityComponentSystem/Entity.cpp Core/SceneSystem/Scene.tpp)
 
 set(TestSources
         test/TestEventSystem.cpp
@@ -40,7 +39,7 @@ set(TestSources
         )
 
 add_executable(${PROJECT_NAME}
-        main.cpp
+        Editor/main.cpp
         ${CementCoreSources}
         )
 

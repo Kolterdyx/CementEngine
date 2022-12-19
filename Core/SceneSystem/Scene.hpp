@@ -5,12 +5,13 @@
 #include <stdexcept>
 #include <vector>
 #include "../EntityComponentSystem/Entity.hpp"
+#include "../UUID/UUID.hpp"
 
 namespace Cement {
     class Scene {
 
     private:
-        uint32_t _id;
+        UUID _id;
         std::vector<Entity> entities;
         entt::registry entityRegistry;
 
@@ -23,11 +24,11 @@ namespace Cement {
 
         virtual void load() {};
 
-        [[nodiscard]] uint32_t getId() const;
+        [[nodiscard]] UUID getId() const;
 
         Scene();
 
-        explicit Scene(uint32_t id);
+        explicit Scene(UUID id);
 
         template<typename T, typename... Args>
         T addEntity(Args... args);
@@ -35,16 +36,8 @@ namespace Cement {
         void removeEntity(entt::entity entity);
 
     };
-
-    template<typename T, typename... Args>
-    T Scene::addEntity(Args... args) {
-        T entity(entityRegistry);
-        entity.init(args...);
-        CEMENT_ASSERT(dynamic_cast<Entity *>(&entity) != nullptr,
-                      "Class passed is does not inherit from Cement::Entity");
-        entities.emplace_back(entity);
-        return entity;
-    }
 }
+
+#include "Scene.tpp"
 
 #endif //CEMENTENGINE_SCENE_HPP

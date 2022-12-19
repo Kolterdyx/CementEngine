@@ -8,6 +8,7 @@
 #include <entt/entt.hpp>
 #include <utility>
 #include "../globals.hpp"
+#include "../UUID/UUID.hpp"
 
 namespace Cement {
 
@@ -15,6 +16,8 @@ namespace Cement {
     private:
         entt::entity entityHandler;
         entt::registry &m_Registry;
+        UUID _id;
+
 
     public:
         Entity() = delete;
@@ -23,7 +26,7 @@ namespace Cement {
             entityHandler = m_Registry.create();
         }
 
-        entt::entity getEntityHandler() const;
+        [[nodiscard]] entt::entity getEntityHandler() const;
 
         virtual void init() = 0;
 
@@ -39,38 +42,15 @@ namespace Cement {
         template<typename... T>
         bool hasComponents();
 
+        [[nodiscard]] UUID getId() const;
+
         void destroy() {
             m_Registry.destroy(entityHandler);
         }
 
     };
-
-    entt::entity Entity::getEntityHandler() const {
-        return entityHandler;
-    }
-
-    template<typename T>
-    void Entity::addComponent() {
-        CEMENT_ASSERT(!hasComponent<T>(), "Entity already has given component");
-        m_Registry.emplace<T>(entityHandler);
-    }
-
-    template<typename T>
-    void Entity::removeComponent() {
-        CEMENT_ASSERT(hasComponent<T>(), "Entity does not have given component");
-        m_Registry.erase<T>(entityHandler);
-    }
-
-    template<typename T>
-    bool Entity::hasComponent() {
-        return m_Registry.any_of<T>(entityHandler);
-    }
-
-    template<typename... T>
-    bool Entity::hasComponents() {
-        return m_Registry.all_of<T...>(entityHandler);
-    }
-
 } // Cement
+
+#include "Entity.tpp"
 
 #endif //CEMENTENGINE_ENTITY_HPP

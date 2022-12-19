@@ -38,12 +38,6 @@ namespace Cement {
             return msg.c_str();
         }
     };
-
-    namespace ecs {
-        using Entity = size_t;
-        using ComponentType = std::uint8_t;
-        using Signature = std::bitset<MAX_COMPONENTS>;
-    }
 }
 
 #define CEMENT_ASSERT(expr, text) (static_cast <bool> (expr) ? void (0) : throw Cement::AssertionFail(#expr, text, __FILE__, __LINE__, __ASSERT_FUNCTION))

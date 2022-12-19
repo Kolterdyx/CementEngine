@@ -11,7 +11,7 @@ namespace Cement {
         _scenes[scene->getId()] = scene;
     }
 
-    void SceneStateManager::removeScene(uint32_t id) {
+    void SceneStateManager::removeScene(UUID id) {
         if (_scenes.find(id) != _scenes.end()) {
             if (_currentScene == id) {
                 _currentScene = 0;
@@ -22,7 +22,7 @@ namespace Cement {
 
     }
 
-    void SceneStateManager::setCurrentScene(uint32_t id) {
+    void SceneStateManager::setCurrentScene(UUID id) {
         if (id > 0)
             _currentScene = id;
         else

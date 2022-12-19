@@ -4,11 +4,11 @@
 #include "Scene.hpp"
 
 namespace Cement {
-    uint32_t Scene::getId() const {
+    UUID Scene::getId() const {
         return _id;
     }
 
-    Scene::Scene(uint32_t id) {
+    Scene::Scene(UUID id) {
         if (id == 0) {
             throw std::invalid_argument("Scene id cannot be 0");
         }
