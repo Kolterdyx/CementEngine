@@ -22,16 +22,26 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 FetchContent_MakeAvailable(EnTT)
 
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost)
+
 set(CMAKE_CXX_STANDARD 14)
 
 set(CementCoreSources
         Core/globals.hpp
-        Core/EventSystem/Event.hpp
+        Core/EventSystem/EventManager.hpp
+        Core/EventSystem/EventManager.tpp
         Core/SceneSystem/Scene.cpp
         Core/SceneSystem/Scene.hpp
-        Core/SceneSystem/SceneStateManager.cpp
-        Core/SceneSystem/SceneStateManager.hpp
-        Core/EntityComponentSystem/Entity.hpp Core/UUID/UUID.hpp Core/EntityComponentSystem/Entity.tpp Core/EntityComponentSystem/Entity.cpp Core/SceneSystem/Scene.tpp)
+        Core/SceneSystem/Scene.tpp
+        Core/SceneSystem/SceneManager.cpp
+        Core/SceneSystem/SceneManager.hpp
+        Core/EntityComponentSystem/Entity.cpp
+        Core/EntityComponentSystem/Entity.hpp
+        Core/UUID/UUID.hpp
+        Core/UUID/UUID.cpp)
 
 set(TestSources
         test/TestEventSystem.cpp
@@ -45,9 +55,15 @@ add_executable(${PROJECT_NAME}
 
 add_executable(${PROJECT_TEST_NAME} ${CementCoreSources} ${TestSources})
 
-# Main executable linked libraries
 target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
 
-# Test linked libraries
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+    target_link_libraries(${PROJECT_TEST_NAME} ${Boost_LIBRARIES})
+else()
+    message(FATAL_ERROR "Boost not found")
+endif()
+
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE EnTT::EnTT)

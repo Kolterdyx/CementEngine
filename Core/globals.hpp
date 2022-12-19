@@ -1,6 +1,3 @@
-//
-// Created by kolterdyx on 10/11/22.
-//
 
 #ifndef CEMENTENGINE_GLOBALS_HPP
 #define CEMENTENGINE_GLOBALS_HPP
@@ -16,9 +13,6 @@
 #include <utility>
 #include <stdexcept>
 #include <regex>
-
-#define MAX_ENTITIES 1000000
-#define MAX_COMPONENTS 64
 
 namespace Cement {
 

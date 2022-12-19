@@ -24,6 +24,12 @@ but currently only officially supports Linux.
 
 ## Building
 
+### Dependencies
+
+```
+sudo apt install build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev
+```
+
 ### Configure
 ```bash
 cmake -B ./build -DCMAKE_BUILD_TYPE=Debug
