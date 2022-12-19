@@ -26,9 +26,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CementCoreSources
         Core/globals.hpp
-        Core/EventSystem/EventDispatcher.cpp
-        Core/EventSystem/EventDispatcher.hpp
-        Core/EventSystem/BaseEvent.hpp
+        Core/EventSystem/Event.hpp
         Core/SceneSystem/SceneSystem.hpp
         Core/SceneSystem/Scene.cpp
         Core/SceneSystem/Scene.hpp

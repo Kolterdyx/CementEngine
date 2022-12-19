@@ -5,7 +5,6 @@
 #ifndef CEMENTENGINE_EVENTSYSTEM_HPP
 #define CEMENTENGINE_EVENTSYSTEM_HPP
 
-#include "BaseEvent.hpp"
-#include "EventDispatcher.hpp"
+#include "Event.hpp"
 
 #endif //CEMENTENGINE_EVENTSYSTEM_HPP

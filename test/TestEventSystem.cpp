@@ -8,7 +8,7 @@ std::string test;
 
 using namespace Cement;
 
-class TestEvent1 : public BaseEvent {
+class TestEvent1 : public Event {
 public:
     constexpr static const EventType type = "Test 1";
 
@@ -17,7 +17,7 @@ public:
     }
 };
 
-class TestEvent2 : public BaseEvent {
+class TestEvent2 : public Event {
 public:
     constexpr static const EventType type = "Test 2";
 
@@ -32,11 +32,11 @@ public:
     }
 };
 
-void testHandler1(const BaseEvent &e) {
+void testHandler1(const Event &e) {
     i++;
 }
 
-void testHandler2(const BaseEvent &e) {
+void testHandler2(const Event &e) {
     const TestEvent2 &event = dynamic_cast<const TestEvent2 &>(e);
     test = event.msg;
 }
@@ -49,8 +49,8 @@ TEST_CASE("Test the Event System", "[Event IEntitySystem]") {
     EventDispatcher dispatcher;
 
     SECTION("Test basic event subscription") {
-        dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
-        dispatcher.subscribe("Test 2", [](const BaseEvent &e) { testHandler2(e); });
+        dispatcher.subscribe("Test 1", [](const Event &e) { testHandler1(e); });
+        dispatcher.subscribe("Test 2", [](const Event &e) { testHandler2(e); });
 
         dispatcher.post(TestEvent2("Hello"));
 
@@ -60,13 +60,13 @@ TEST_CASE("Test the Event System", "[Event IEntitySystem]") {
 
     SECTION("Test proper event dispatching") {
 
-        dispatcher.subscribe("Test 2", [](const BaseEvent &e) { testHandler2(e); });
+        dispatcher.subscribe("Test 2", [](const Event &e) { testHandler2(e); });
         dispatcher.post(TestEvent1());
 
         REQUIRE(test == "");
         REQUIRE(i == 0);
 
-        dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
+        dispatcher.subscribe("Test 1", [](const Event &e) { testHandler1(e); });
 
         dispatcher.post(TestEvent1());
         dispatcher.post(TestEvent2("Hello"));
@@ -74,7 +74,7 @@ TEST_CASE("Test the Event System", "[Event IEntitySystem]") {
         REQUIRE(test == "Hello");
         REQUIRE(i == 1);
 
-        dispatcher.subscribe("Test 1", [](const BaseEvent &e) { testHandler1(e); });
+        dispatcher.subscribe("Test 1", [](const Event &e) { testHandler1(e); });
         dispatcher.post(TestEvent1());
         dispatcher.post(TestEvent2("world"));
 
