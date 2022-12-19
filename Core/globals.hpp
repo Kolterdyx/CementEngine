@@ -34,7 +34,7 @@ namespace Cement {
                    std::string("\n    ") + expr;
         }
 
-        const char *what() const noexcept {
+        [[nodiscard]] const char *what() const noexcept override {
             return msg.c_str();
         }
     };
