@@ -9,6 +9,9 @@ namespace Cement {
     Scene::Scene() : _id(generateUUID()) {
     }
 
+    Scene::Scene(const Scene &other) : _id(other._id) {
+    }
+
     void Scene::removeEntity(UUID entity) {
         entityRegistry.destroy(handles[entity]);
         entities.erase(entity);

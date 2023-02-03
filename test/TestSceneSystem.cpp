@@ -1,5 +1,7 @@
-#include "../Core/SceneSystem/SceneSystem.hpp"
+
 #include "catch2/catch_test_macros.hpp"
+#include "../Core/SceneSystem/Scene.hpp"
+#include "../Core/SceneSystem/SceneManager.hpp"
 
 using namespace Cement;
 
@@ -9,7 +11,7 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
     public:
         int n;
 
-        TestScene(unsigned int i) : Scene(i) {
+        explicit TestScene(unsigned int i) : Scene() {
             n = 0;
         }
 
@@ -25,48 +27,44 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
     };
 
     SECTION("Test basic scene creation") {
-        SceneStateManager manager;
-        std::shared_ptr<Scene> scene = std::make_shared<TestScene>(1);
-        manager.addScene(scene);
+        SceneManager manager;
+        UUID scene = manager.createScene<TestScene>(1);
         std::shared_ptr<Scene> cScene = manager.getCurrentScene();
-        REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 1);
+        REQUIRE(cScene.get() != nullptr);
+        REQUIRE(cScene->getId().is_nil() == false);
+        REQUIRE(cScene->getId() == scene);
     }
 
     SECTION("Test scene removal") {
-        SceneStateManager manager;
-        std::shared_ptr<Scene> scene = std::make_shared<TestScene>(1);
-        manager.addScene(scene);
+        SceneManager manager;
+        UUID scene = manager.createScene<TestScene>(1);
         std::shared_ptr<Scene> cScene = manager.getCurrentScene();
-        REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 1);
-        manager.removeScene(1);
+        REQUIRE(cScene.get() != nullptr);
+        REQUIRE(cScene->getId() == scene);
+        manager.removeScene(scene);
         cScene = manager.getCurrentScene();
-        REQUIRE(cScene == nullptr);
+        REQUIRE(cScene.get() == nullptr);
     }
 
     SECTION("Test scene switching") {
-        SceneStateManager manager;
-        std::shared_ptr<Scene> scene1 = std::make_shared<TestScene>(1);
-        std::shared_ptr<Scene> scene2 = std::make_shared<TestScene>(2);
-        manager.addScene(scene1);
-        manager.addScene(scene2);
+        SceneManager manager;
+        UUID scene1 = manager.createScene<TestScene>(1);
+        UUID scene2 = manager.createScene<TestScene>(2);
         std::shared_ptr<Scene> cScene = manager.getCurrentScene();
-        REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 1);
-        manager.setCurrentScene(2);
+        REQUIRE(cScene.get() != nullptr);
+        REQUIRE(cScene->getId() == scene1);
+        manager.setCurrentScene(scene2);
         cScene = manager.getCurrentScene();
-        REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 2);
+        REQUIRE(cScene.get() != nullptr);
+        REQUIRE(cScene->getId() == scene2);
     }
 
     SECTION("Test scene update") {
-        SceneStateManager manager;
-        std::shared_ptr<Scene> scene = std::make_shared<TestScene>(1);
-        manager.addScene(scene);
+        SceneManager manager;
+        UUID scene = manager.createScene<TestScene>(1);
         std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 1);
+        REQUIRE(cScene->getId() == scene);
         REQUIRE(((TestScene *) cScene.get())->n == 0);
         manager.updateCurrentScene();
         REQUIRE(((TestScene *) cScene.get())->n == 1);
@@ -75,23 +73,21 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
     }
 
     SECTION("Test multiple scene update") {
-        SceneStateManager manager;
-        std::shared_ptr<Scene> scene1 = std::make_shared<TestScene>(1);
-        std::shared_ptr<Scene> scene2 = std::make_shared<TestScene>(2);
-        manager.addScene(scene1);
-        manager.addScene(scene2);
+        SceneManager manager;
+        UUID scene1 = manager.createScene<TestScene>(1);
+        UUID scene2 = manager.createScene<TestScene>(1);
         std::shared_ptr<Scene> cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 1);
+        REQUIRE(cScene->getId() == scene1);
         REQUIRE(((TestScene *) cScene.get())->n == 0);
         manager.updateCurrentScene();
         REQUIRE(((TestScene *) cScene.get())->n == 1);
         manager.updateCurrentScene();
         REQUIRE(((TestScene *) cScene.get())->n == 2);
-        manager.setCurrentScene(2);
+        manager.setCurrentScene(scene2);
         cScene = manager.getCurrentScene();
         REQUIRE(cScene != nullptr);
-        REQUIRE(cScene->getId() == 2);
+        REQUIRE(cScene->getId() == scene2);
         REQUIRE(((TestScene *) cScene.get())->n == 0);
         manager.updateCurrentScene();
         REQUIRE(((TestScene *) cScene.get())->n == 1);

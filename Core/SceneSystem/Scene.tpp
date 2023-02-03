@@ -5,13 +5,13 @@
 namespace Cement {
 
     template<typename T, typename... Args>
-    T Scene::addEntity(Args... args) {
+    UUID Scene::createEntity(Args... args) {
         T entity(generateUUID());
         entity.init(args...);
         CEMENT_ASSERT((dynamic_cast<Entity *>(&entity) != nullptr), "Class passed is does not inherit publicly from Cement::Entity");
         entities.insert(std::make_pair(entity.getId(), std::make_unique<T>(entity)));
         handles.insert(std::make_pair(entity.getId(), entityRegistry.create()));
-        return entity;
+        return entity.getId();
     }
 
     template<typename... T>
@@ -45,8 +45,8 @@ namespace Cement {
     }
 
     template<typename... T>
-    auto Scene::view(UUID entity) {
-        return entityRegistry.view<T...>(handles[entity]);
+    auto Scene::view() {
+        return entityRegistry.view<T...>();
     }
 
 }

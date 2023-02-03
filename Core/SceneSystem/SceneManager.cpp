@@ -3,14 +3,6 @@
 
 namespace Cement {
 
-
-    void SceneManager::addScene(const std::shared_ptr<Scene> &scene) {
-        if (_currentScene.is_nil()) {
-            _currentScene = scene->getId();
-        }
-        _scenes[scene->getId()] = scene;
-    }
-
     void SceneManager::removeScene(UUID id) {
         if (_scenes.find(id) != _scenes.end()) {
             if (_currentScene == id) {
@@ -30,10 +22,7 @@ namespace Cement {
     }
 
     std::shared_ptr<Scene> SceneManager::getCurrentScene() {
-        if (_scenes.find(_currentScene) != _scenes.end()) {
-            return _scenes[_currentScene];
-        }
-        return nullptr;
+        return getScene(_currentScene);
     }
 
     void SceneManager::updateCurrentScene() {
@@ -43,6 +32,13 @@ namespace Cement {
     }
 
     std::shared_ptr<Scene> SceneManager::getScene(UUID id) {
-        return _scenes[id];
+        if (_scenes.find(id) != _scenes.end()) {
+            return _scenes[id];
+        }
+        return nullptr;
+    }
+
+    SceneManager::SceneManager() {
+        _currentScene = nilUUID();
     }
 }

@@ -22,19 +22,49 @@ namespace Cement {
 
     public:
 
-        void addScene(const std::shared_ptr<Scene> &scene);
+        SceneManager();
 
+        /**
+         * @brief Add a scene to the scene manager
+         * @tparam T The Class of the scene to add (must be a subclass of Scene)
+         * @param args The arguments to pass to the scene constructor
+         */
+        template<typename T, typename... Args>
+        UUID createScene(Args... args);
+
+        /**
+         * @brief Remove a scene from the scene manager
+         * @param id The UUID of the scene to remove
+         */
         void removeScene(UUID id);
 
+        /**
+         * @brief Set the current scene
+         * @param id The UUID of the scene to set as current
+         */
         void setCurrentScene(UUID id);
 
+        /**
+         * @brief Get a scene from the scene manager
+         * @param id The UUID of the scene to get
+         * @return The scene
+         */
         std::shared_ptr<Scene> getScene(UUID id);
 
+        /**
+         * @brief Update the current scene. Calls Scene::update()
+         */
         void updateCurrentScene();
 
+        /**
+         * @brief Get the current scene
+         * @return The current scene
+         */
         std::shared_ptr<Scene> getCurrentScene();
 
     };
 }
+
+#include "SceneManager.tpp"
 
 #endif //CEMENTENGINE_SCENEMANAGER_HPP
