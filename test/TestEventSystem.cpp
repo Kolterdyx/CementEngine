@@ -1,7 +1,7 @@
 #include <iostream>
 #include "catch2/catch_test_macros.hpp"
-#include "../Core/EventSystem/Event.hpp"
-#include "../Core/EventSystem/EventDispatcher.hpp"
+#include "../Core/Events/Event.hpp"
+#include "../Core/Events/EventDispatcher.hpp"
 
 
 int i = 0;

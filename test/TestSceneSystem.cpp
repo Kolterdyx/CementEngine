@@ -1,7 +1,7 @@
 
 #include "catch2/catch_test_macros.hpp"
-#include "../Core/SceneSystem/Scene.hpp"
-#include "../Core/SceneSystem/SceneManager.hpp"
+#include "../Core/Scenes/Scene.hpp"
+#include "../Core/Scenes/SceneManager.hpp"
 
 using namespace Cement;
 
