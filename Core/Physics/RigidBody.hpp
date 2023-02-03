@@ -6,6 +6,9 @@
 #define CEMENTENGINE_RIGIDBODY_HPP
 
 #include "Shape.hpp"
+#include "Vector2f.hpp"
+
+using namespace Cement::Math;
 
 namespace Cement::Physics {
 
@@ -14,16 +17,17 @@ namespace Cement::Physics {
 	private:
 		const Shape shape;
 
+	protected:
 		Vector2f position;
-
-    public:
-		explicit RigidBody(Shape shape) : shape(shape) {}
+	public:
+		explicit RigidBody(Shape shape) : shape(shape), position(Vector2f::zero()) {}
 
         virtual bool collide(RigidBody &rigidBody) = 0;
 
 		[[nodiscard]] Shape getShape() const;
 
-    };
+		const Vector2f &getPosition();
+	};
 
 } // Physics
 
