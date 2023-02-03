@@ -31,17 +31,20 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CementCoreSources
         Core/globals.hpp
-        Core/EventSystem/EventDispatcher.hpp
-        Core/EventSystem/EventDispatcher.tpp
-        Core/SceneSystem/Scene.cpp
-        Core/SceneSystem/Scene.hpp
-        Core/SceneSystem/Scene.tpp
-        Core/SceneSystem/SceneManager.cpp
-        Core/SceneSystem/SceneManager.hpp
+        Core/Events/EventDispatcher.hpp
+        Core/Events/EventDispatcher.tpp
+        Core/Scenes/Scene.cpp
+        Core/Scenes/Scene.hpp
+        Core/Scenes/Scene.tpp
+        Core/Scenes/SceneManager.cpp
+        Core/Scenes/SceneManager.hpp
         Core/EntityComponentSystem/Entity.cpp
         Core/EntityComponentSystem/Entity.hpp
         Core/UUID/UUID.hpp
-        Core/UUID/UUID.cpp Core/SceneSystem/SceneManager.tpp Core/EventSystem/Event.cpp Core/EventSystem/Event.hpp)
+        Core/UUID/UUID.cpp
+        Core/Scenes/SceneManager.tpp
+        Core/Events/Event.cpp
+        Core/Events/Event.hpp)
 
 set(TestSources
         test/TestEventSystem.cpp
