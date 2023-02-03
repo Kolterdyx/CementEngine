@@ -44,7 +44,7 @@ set(CementCoreSources
         Core/UUID/UUID.cpp
         Core/Scenes/SceneManager.tpp
         Core/Events/Event.cpp
-        Core/Events/Event.hpp)
+        Core/Events/Event.hpp Core/Physics/RigidBody.hpp)
 
 set(TestSources
         test/TestEventSystem.cpp
