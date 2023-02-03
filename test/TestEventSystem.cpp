@@ -1,45 +1,37 @@
-#include "../Core/EventSystem/EventSystem.hpp"
+#include <iostream>
 #include "catch2/catch_test_macros.hpp"
+#include "../Core/EventSystem/Event.hpp"
+#include "../Core/EventSystem/EventDispatcher.hpp"
 
 
 int i = 0;
 
 std::string test;
 
-using namespace Cement;
+using namespace Cement::Event;
 
-class TestEvent1 : public Event {
+struct TestEvent1 : public Event {
 public:
-    constexpr static const EventType type = "Test 1";
-
-    EventType getType() const {
-        return type;
-    }
+    TestEvent1(int i) : i(i) {}
+    int i;
 };
 
-class TestEvent2 : public Event {
+struct TestEvent2 : public Event {
+
 public:
-    constexpr static const EventType type = "Test 2";
-
-    EventType getType() const {
-        return type;
-    }
-
-    std::string msg;
-
-    explicit TestEvent2(std::string msg) {
-        this->msg = msg;
-    }
+    TestEvent2(std::string s) : s(s) {}
+    std::string s;
 };
 
-void testHandler1(const Event &e) {
-    i++;
-}
+struct handler {
+    void receive(const TestEvent1 &event) {
+        i = event.i;
+    }
 
-void testHandler2(const Event &e) {
-    const TestEvent2 &event = dynamic_cast<const TestEvent2 &>(e);
-    test = event.msg;
-}
+    void receive2(const TestEvent2 &event) {
+        test = event.s;
+    }
+};
 
 TEST_CASE("Test the Event System", "[Event IEntitySystem]") {
 
@@ -48,38 +40,40 @@ TEST_CASE("Test the Event System", "[Event IEntitySystem]") {
 
     EventDispatcher dispatcher;
 
-    SECTION("Test basic event subscription") {
-        dispatcher.subscribe("Test 1", [](const Event &e) { testHandler1(e); });
-        dispatcher.subscribe("Test 2", [](const Event &e) { testHandler2(e); });
 
-        dispatcher.post(TestEvent2("Hello"));
+    SECTION("Test basic event subscription") {
+        handler h;
+        dispatcher.sink<TestEvent2>().connect<&handler::receive2>(h);
+
+        dispatcher.emit<TestEvent2>("Hello");
 
         REQUIRE(test == "Hello");
         REQUIRE(i == 0);
     }
 
     SECTION("Test proper event dispatching") {
-
-        dispatcher.subscribe("Test 2", [](const Event &e) { testHandler2(e); });
-        dispatcher.post(TestEvent1());
+        handler h;
+        dispatcher.sink<TestEvent2>().connect<&handler::receive2>(h);
+        dispatcher.emit<TestEvent1>(1);
 
         REQUIRE(test == "");
         REQUIRE(i == 0);
 
-        dispatcher.subscribe("Test 1", [](const Event &e) { testHandler1(e); });
 
-        dispatcher.post(TestEvent1());
-        dispatcher.post(TestEvent2("Hello"));
+        dispatcher.sink<TestEvent1>().connect<&handler::receive>(h);
+
+
+        dispatcher.emit<TestEvent1>(1);
+        dispatcher.emit<TestEvent2>("Hello");
 
         REQUIRE(test == "Hello");
         REQUIRE(i == 1);
 
-        dispatcher.subscribe("Test 1", [](const Event &e) { testHandler1(e); });
-        dispatcher.post(TestEvent1());
-        dispatcher.post(TestEvent2("world"));
+        dispatcher.emit<TestEvent1>(2);
+        dispatcher.emit<TestEvent2>("world");
 
         REQUIRE(test == "world");
-        REQUIRE(i == 3);
+        REQUIRE(i == 2);
     }
 
 
