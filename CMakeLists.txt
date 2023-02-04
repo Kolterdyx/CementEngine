@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.23)
+set(CMAKE_CXX_STANDARD 14)
+
 set(PROJECT_NAME CementEngine)
 set(PROJECT_TEST_NAME ${PROJECT_NAME}Test)
 
 project(${PROJECT_NAME})
 
+add_subdirectory(Box2D-CMake)
 
 Include(FetchContent)
 
@@ -45,9 +48,10 @@ set(CementCoreSources
         Core/Scenes/SceneManager.tpp
         Core/Events/Event.cpp
         Core/Events/Event.hpp
-        Core/Physics/RigidBody.hpp
-        Core/Physics/RigidBody.cpp
-        Core/Physics/Shape.hpp Core/Physics/CircleRigidBody.cpp Core/Physics/CircleRigidBody.hpp Core/Physics/Vector2f.cpp Core/Physics/Vector2f.hpp)
+        Core/Math/Vector2f.cpp
+        Core/Math/Vector2f.hpp
+        Core/Math/Math.cpp
+        Core/Math/Math.hpp)
 
 set(TestSources
         test/TestEventSystem.cpp
@@ -62,6 +66,7 @@ add_executable(${PROJECT_NAME}
 add_executable(${PROJECT_TEST_NAME} ${CementCoreSources} ${TestSources})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
+target_link_libraries(${PROJECT_NAME} PRIVATE box2d)
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -71,5 +76,7 @@ else()
     message(FATAL_ERROR "Boost not found")
 endif()
 
+target_link_libraries(${PROJECT_TEST_NAME} PRIVATE box2d)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE EnTT::EnTT)
+

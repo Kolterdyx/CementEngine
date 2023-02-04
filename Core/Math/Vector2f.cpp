@@ -154,5 +154,17 @@ namespace Cement::Math {
 		return Vector2f(a).rotate(angle);
 	}
 
+	float Vector2f::dot(const Vector2f &other) const {
+		return dot(*this, other);
+	}
+
+	float Vector2f::cross(const Vector2f &other) const {
+		return cross(*this, other);
+	}
+
+	Vector2f Vector2f::operator-() const {
+		return {-x, -y};
+	}
+
 
 } // Math

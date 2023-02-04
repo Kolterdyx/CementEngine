@@ -14,6 +14,7 @@ namespace Cement::Math {
 
 		Vector2f operator+(const Vector2f &other) const;
 		Vector2f operator-(const Vector2f &other) const;
+		Vector2f operator-() const;
 		Vector2f operator*(const Vector2f &other) const;
 		Vector2f operator*(const float &scalar) const;
 		Vector2f operator/(const Vector2f &other) const;
@@ -38,6 +39,10 @@ namespace Cement::Math {
 
 		static float dot(const Vector2f &a, const Vector2f &b);
 		static float cross(const Vector2f &a, const Vector2f &b);
+
+		[[nodiscard]] float dot(const Vector2f &other) const;
+		[[nodiscard]] float cross(const Vector2f &other) const;
+
 		[[nodiscard]] float length() const;
 		[[nodiscard]] float lengthSquared() const;
 		void normalize();
