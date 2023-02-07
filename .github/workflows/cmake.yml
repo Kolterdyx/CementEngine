@@ -29,7 +29,7 @@ jobs:
       uses: awalsh128/cache-apt-pkgs-action@v1.2.4
       with:
         # Space delimited list of packages to install.
-        packages: libsfml-dev libbox2d-dev
+        packages: build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev libbox2d-dev libsfml-dev
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}
