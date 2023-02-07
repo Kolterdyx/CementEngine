@@ -53,7 +53,15 @@ set(CementCoreSources
         Core/Math/Vector2f.cpp
         Core/Math/Vector2f.hpp
         Core/Math/Math.cpp
-        Core/Math/Math.hpp Core/Physics/Conversions.cpp Core/Physics/Conversions.hpp Core/Application.cpp Core/Application.hpp Core/Physics/Box2DDebugDraw.cpp Core/Physics/Box2DDebugDraw.hpp Core/globals.cpp)
+        Core/Math/Math.hpp
+        Core/Physics/Conversions.cpp
+        Core/Physics/Conversions.hpp
+        Core/Application.cpp
+        Core/Application.hpp
+        Core/Physics/Box2DDebugDraw.cpp
+        Core/Physics/Box2DDebugDraw.hpp
+        Core/globals.cpp
+        )
 
 set(TestSources
         test/TestEventSystem.cpp
