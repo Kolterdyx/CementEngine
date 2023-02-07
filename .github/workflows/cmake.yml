@@ -26,7 +26,10 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: apt install libsfml-dev libbox2d-dev
+      uses: awalsh128/cache-apt-pkgs-action@v1.2.4
+      with:
+        # Space delimited list of packages to install.
+        packages: libsfml-dev libbox2d-dev
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}
