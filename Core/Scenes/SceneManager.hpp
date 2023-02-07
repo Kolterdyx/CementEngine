@@ -7,8 +7,9 @@
 
 #include <unordered_map>
 #include <memory>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "Scene.hpp"
-#include "../UUID/UUID.hpp"
+#include "UUID/UUID.hpp"
 
 
 namespace Cement {
@@ -16,13 +17,17 @@ namespace Cement {
     class SceneManager {
 
     private:
-        std::unordered_map<UUID, std::shared_ptr<Scene>> _scenes;
 
-        UUID _currentScene;
+        std::unordered_map<UUID, std::shared_ptr<Scene*>> _scenes;
+        sf::RenderWindow *_window;
+
+        UUID _currentScene{};
 
     public:
 
-        SceneManager();
+        explicit SceneManager(sf::RenderWindow *window);
+
+        ~SceneManager();
 
         /**
          * @brief Add a scene to the scene manager
@@ -49,10 +54,10 @@ namespace Cement {
          * @param id The UUID of the scene to get
          * @return The scene
          */
-        std::shared_ptr<Scene> getScene(UUID id);
+        std::shared_ptr<Scene*> getScene(UUID id);
 
         /**
-         * @brief Update the current scene. Calls Scene::update()
+         * @brief Update the current scene. Calls Scene::onUpdate()
          */
         void updateCurrentScene();
 
@@ -60,7 +65,12 @@ namespace Cement {
          * @brief Get the current scene
          * @return The current scene
          */
-        std::shared_ptr<Scene> getCurrentScene();
+        std::shared_ptr<Scene*> getCurrentScene();
+
+        /**
+         * @brief Get the render window
+         */
+        sf::RenderWindow *getWindow();
 
     };
 }

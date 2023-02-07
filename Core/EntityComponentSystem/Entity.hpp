@@ -4,8 +4,8 @@
 
 #include <entt/entt.hpp>
 #include <utility>
-#include "../globals.hpp"
-#include "../UUID/UUID.hpp"
+#include "globals.hpp"
+#include "UUID/UUID.hpp"
 
 namespace Cement {
 

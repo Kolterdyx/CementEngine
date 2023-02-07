@@ -3,14 +3,14 @@
 
 namespace Cement {
 
-	Application::Application(const std::string &title, unsigned int width, unsigned int height) {
+	Application::Application(const std::string &title, unsigned int width, unsigned int height) : sceneManager(SceneManager(&window)) {
 		window.create(sf::VideoMode(width, height), title);
-		sceneManager = SceneManager();
 		eventDispatcher = EventDispatcher();
 	}
 
 	void Application::run() {
 		while (window.isOpen()) {
+            Cement::sleep(1);
 			window.clear();
 			sf::Event event;
 			while (window.pollEvent(event)) {
@@ -27,4 +27,5 @@ namespace Cement {
 		}
 		eventDispatcher.emit<sf::Event>();
 	}
+
 }

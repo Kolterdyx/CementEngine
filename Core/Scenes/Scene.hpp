@@ -4,10 +4,12 @@
 
 #include <stdexcept>
 #include <vector>
-#include "../EntityComponentSystem/Entity.hpp"
-#include "../UUID/UUID.hpp"
-#include "box2d/box2d.h"
-#include "../Physics/Conversions.hpp"
+#include "EntityComponentSystem/Entity.hpp"
+#include "UUID/UUID.hpp"
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include "Physics/Conversions.hpp"
+#include "Physics/Box2DDebugDraw.hpp"
 
 namespace Cement {
 
@@ -19,15 +21,21 @@ namespace Cement {
         std::unordered_map<UUID, std::unique_ptr<Entity>> entities;
         std::unordered_map<UUID, entt::entity> handles;
         entt::registry entityRegistry;
+        sf::RenderWindow *window;
+        b2World *world;
+        Box2DDebugDraw *_debugDraw;
 
-		b2World world;
+    protected:
+        b2World *getWorld();
 
     public:
+
+        Scene();
 
         /**
          * @brief onCreate() is called when the scene is created. Override this method to initialize your scene.
          */
-        virtual void onCreate() {};
+        virtual void onCreate();
 
         /**
          * @brief onDestroy() is called when the scene is destroyed. Override this method to initialize your scene.
@@ -35,9 +43,9 @@ namespace Cement {
         virtual void onDestroy() {};
 
         /**
-         * @brief update() is called by the scene manager every frame. Override this method to update your scene.
+         * @brief onUpdate() is called by the scene manager every frame. Override this method to update your scene.
          */
-        virtual void update() {};
+        virtual void onUpdate(float delta) {};
 
         /**
          * @brief load() is called by the scene manager when the scene is loaded. Override this method to load your scene.
@@ -50,9 +58,9 @@ namespace Cement {
          */
         [[nodiscard]] UUID getId() const;
 
-        Scene();
+        Scene(Scene &other);
 
-        Scene(const Scene &other);
+        ~Scene();
 
         /**
          * @brief Create an entity in the scene
@@ -132,6 +140,15 @@ namespace Cement {
          */
         template<typename... T>
         auto view();
+
+        /**
+         * @brief Get render window
+         */
+        sf::RenderWindow *getWindow();
+
+        void setWindow(sf::RenderWindow *window);
+
+        Box2DDebugDraw *getDebugDraw();
     };
 }
 

@@ -10,13 +10,15 @@
 namespace Cement {
     template<typename T, typename... Args>
     UUID SceneManager::createScene(Args... args) {
-        T scene(args...);
-        CEMENT_ASSERT(dynamic_cast<Scene *>(&scene) != nullptr, "Class passed is not a subclass of Scene");
-        _scenes[scene.getId()] = std::make_shared<T>(scene);
+        Scene *scene = new T(args...);
+//        CEMENT_ASSERT(dynamic_cast<Scene *>(scene) != nullptr, "Class passed is not a subclass of Scene");
+        scene->setWindow(_window);
+        scene->onCreate();
+        _scenes[scene->getId()] = std::make_shared<Scene*>(scene);
         if (_currentScene.is_nil()) {
-            _currentScene = scene.getId();
+            _currentScene = scene->getId();
         }
-        return scene.getId();
+        return scene->getId();
     }
 }
 

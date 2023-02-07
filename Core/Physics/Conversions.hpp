@@ -1,8 +1,9 @@
 #ifndef CONVERSIONS_HPP
 #define CONVERSIONS_HPP
 
-#include "box2d/box2d.h"
-#include "../Math/Vector2f.hpp"
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics/Color.hpp>
+#include "Math/Vector2f.hpp"
 
 using namespace Cement::Math;
 namespace Cement {
@@ -18,7 +19,11 @@ namespace Cement {
 
 		static Vector2f b2Vec2ToVec2(const b2Vec2 &vec);
 
-		static float pixelsToMeters(float pixels);
+		static float p2m(float pixels);
+
+		static float m2p(float meters);
+
+        static sf::Color b2ColorTosfColor(const b2Color &color);
 
 	};
 

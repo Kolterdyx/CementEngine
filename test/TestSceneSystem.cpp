@@ -59,7 +59,7 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
         REQUIRE(cScene->getId() == scene2);
     }
 
-    SECTION("Test scene update") {
+    SECTION("Test scene onUpdate") {
         SceneManager manager;
         UUID scene = manager.createScene<TestScene>(1);
         std::shared_ptr<Scene> cScene = manager.getCurrentScene();
@@ -72,7 +72,7 @@ TEST_CASE("Test the Scene System", "[Scene System]") {
         REQUIRE(((TestScene *) cScene.get())->n == 2);
     }
 
-    SECTION("Test multiple scene update") {
+    SECTION("Test multiple scene onUpdate") {
         SceneManager manager;
         UUID scene1 = manager.createScene<TestScene>(1);
         UUID scene2 = manager.createScene<TestScene>(1);

@@ -8,7 +8,7 @@
 namespace Cement {
 	class Application {
 
-	private:
+	protected:
 		sf::RenderWindow window;
 
 		SceneManager sceneManager;
@@ -18,6 +18,14 @@ namespace Cement {
 	public:
 		Application(const std::string &title, unsigned int width, unsigned int height);
 
+        /**
+         * @brief Override this method to add your own code to be executed when the application is created.
+         */
+        virtual void onCreate() {};
+
+        /**
+         * @brief Call this method to run the application.
+         */
 		void run();
 
 		void events(sf::Event event);

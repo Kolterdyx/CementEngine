@@ -14,6 +14,20 @@
 #include <stdexcept>
 #include <regex>
 
+#ifdef _WIN32
+#  define WIN32_LEAN_AND_MEAN
+#  include <windows.h>
+
+#else
+#  include <time.h>
+#  include <errno.h>
+
+#  ifdef __APPLE__
+#    include <mach/clock.h>
+#    include <mach/mach.h>
+#  endif
+#endif // _WIN32
+
 namespace Cement {
 
     class AssertionFail : public std::runtime_error {
@@ -32,6 +46,8 @@ namespace Cement {
             return msg.c_str();
         }
     };
+
+    void sleep(int ms);
 
 }
 

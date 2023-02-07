@@ -39,6 +39,7 @@
 #include "box2d/b2_world.h"
 
 #include <new>
+#include <iostream>
 
 b2World::b2World(const b2Vec2& gravity)
 {
@@ -1038,6 +1039,7 @@ void b2World::RayCast(b2RayCastCallback* callback, const b2Vec2& point1, const b
 
 void b2World::DrawShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color)
 {
+
 	switch (fixture->GetType())
 	{
 	case b2Shape::e_circle:
@@ -1108,15 +1110,17 @@ void b2World::DebugDraw()
 {
 	if (m_debugDraw == nullptr)
 	{
-		return;
-	}
+        return;
+    }
 
-	uint32 flags = m_debugDraw->GetFlags();
+    uint32 flags = m_debugDraw->GetFlags();
 
 	if (flags & b2Draw::e_shapeBit)
 	{
-		for (b2Body* b = m_bodyList; b; b = b->GetNext())
+        std::cout << "b2World::DebugDraw() " << m_debugDraw << std::endl;
+        for (b2Body* b = m_bodyList; b; b = b->GetNext())
 		{
+
 			const b2Transform& xf = b->GetTransform();
 			for (b2Fixture* f = b->GetFixtureList(); f; f = f->GetNext())
 			{

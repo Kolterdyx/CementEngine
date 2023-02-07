@@ -6,7 +6,7 @@ set(PROJECT_TEST_NAME ${PROJECT_NAME}Test)
 
 project(${PROJECT_NAME})
 
-add_subdirectory(Box2D-CMake)
+include_directories(Core)
 
 Include(FetchContent)
 
@@ -28,11 +28,11 @@ FetchContent_MakeAvailable(EnTT)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost)
 
-find_package(SFML 2.5
-  COMPONENTS
-    system window graphics network audio REQUIRED)
+find_package(Boost)
+find_package(Box2D)
+#add_subdirectory(Box2D-CMake)
+find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 
 set(CementCoreSources
         Core/globals.hpp
@@ -53,24 +53,29 @@ set(CementCoreSources
         Core/Math/Vector2f.cpp
         Core/Math/Vector2f.hpp
         Core/Math/Math.cpp
-        Core/Math/Math.hpp Core/Physics/Conversions.cpp Core/Physics/Conversions.hpp Core/Application.cpp Core/Application.hpp)
+        Core/Math/Math.hpp Core/Physics/Conversions.cpp Core/Physics/Conversions.hpp Core/Application.cpp Core/Application.hpp Core/Physics/Box2DDebugDraw.cpp Core/Physics/Box2DDebugDraw.hpp Core/globals.cpp)
 
 set(TestSources
         test/TestEventSystem.cpp
         test/TestSceneSystem.cpp
         )
 
-add_executable(${PROJECT_NAME}
-        Editor/main.cpp
-        ${CementCoreSources}
+set(AppSources
+        App/main.cpp
+        App/MyApp.cpp
+        App/MyApp.hpp
+        App/scenes/PhysicsTestScene.cpp
+        App/scenes/PhysicsTestScene.hpp
         )
+
+add_executable(${PROJECT_NAME} ${CementCoreSources} ${AppSources})
 
 add_executable(${PROJECT_TEST_NAME} ${CementCoreSources} ${TestSources})
 
-include_directories(Box2D-CMake/box2d/include)
+#include_directories(Box2D-CMake/box2d/include)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
-target_link_libraries(${PROJECT_NAME} PRIVATE box2d)
+target_link_libraries(${PROJECT_NAME} PRIVATE Box2D)
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
 
 if(Boost_FOUND)
@@ -81,7 +86,7 @@ else()
     message(FATAL_ERROR "Boost not found")
 endif()
 
-target_link_libraries(${PROJECT_TEST_NAME} PRIVATE box2d)
+target_link_libraries(${PROJECT_TEST_NAME} PRIVATE Box2D)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE EnTT::EnTT)
