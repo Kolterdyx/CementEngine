@@ -23,5 +23,4 @@ public:
     friend Cement::Scene;
 };
 
-
 #endif //CEMENTENGINE_TESTOBJECT_HPP
