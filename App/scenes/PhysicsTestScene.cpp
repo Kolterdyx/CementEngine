@@ -9,7 +9,7 @@
 
 void PhysicsTestScene::onCreate() {
 
-    createEntity<TestObject>(Vector2f(0, 0));
+    createEntity<TestObject>(Vector2f(400, 300));
 
     Scene::onCreate();
 
