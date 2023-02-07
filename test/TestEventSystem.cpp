@@ -7,8 +7,7 @@
 int i = 0;
 
 std::string test;
-
-using namespace Cement::Event;
+using namespace Cement;
 
 struct TestEvent1 : public Event {
 public:

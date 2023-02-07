@@ -32,6 +32,7 @@ namespace Cement {
             return msg.c_str();
         }
     };
+
 }
 
 #define CEMENT_ASSERT(expr, text) (static_cast <bool> (expr) ? void (0) : throw Cement::AssertionFail(#expr, text, __FILE__, __LINE__, __ASSERT_FUNCTION))

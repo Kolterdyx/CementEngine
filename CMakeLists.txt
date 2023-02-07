@@ -30,7 +30,9 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost)
 
-set(CMAKE_CXX_STANDARD 14)
+find_package(SFML 2.5
+  COMPONENTS
+    system window graphics network audio REQUIRED)
 
 set(CementCoreSources
         Core/globals.hpp
@@ -51,7 +53,7 @@ set(CementCoreSources
         Core/Math/Vector2f.cpp
         Core/Math/Vector2f.hpp
         Core/Math/Math.cpp
-        Core/Math/Math.hpp)
+        Core/Math/Math.hpp Core/Physics/Conversions.cpp Core/Physics/Conversions.hpp Core/Application.cpp Core/Application.hpp)
 
 set(TestSources
         test/TestEventSystem.cpp
@@ -65,8 +67,11 @@ add_executable(${PROJECT_NAME}
 
 add_executable(${PROJECT_TEST_NAME} ${CementCoreSources} ${TestSources})
 
+include_directories(Box2D-CMake/box2d/include)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
 target_link_libraries(${PROJECT_NAME} PRIVATE box2d)
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -77,6 +82,7 @@ else()
 endif()
 
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE box2d)
+target_link_libraries(${PROJECT_TEST_NAME} PRIVATE sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(${PROJECT_TEST_NAME} PRIVATE EnTT::EnTT)
 

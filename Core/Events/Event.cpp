@@ -3,3 +3,7 @@
 //
 
 #include "Event.hpp"
+
+namespace Cement {
+
+}
