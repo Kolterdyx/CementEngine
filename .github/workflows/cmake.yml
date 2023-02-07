@@ -6,7 +6,6 @@ on:
       - "**/*.md"
       - "**/*.txt"
       - "docs/**"
-      - ".github/**"
       - ".gitignore"
       - ".gitmodules"
     branches: [ "master" ]
@@ -15,7 +14,6 @@ on:
       - "**/*.md"
       - "**/*.txt"
       - "docs/**"
-      - ".github/**"
       - ".gitignore"
       - ".gitmodules"
     branches: [ "master" ]
