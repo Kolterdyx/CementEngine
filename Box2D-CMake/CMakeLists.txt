@@ -10,7 +10,6 @@ file(GLOB_RECURSE Box2D_SRC
 )
 include_directories(box2d/include)
 
-message(STATUS "Box2D_SRC: ${Box2D_SRC}")
 add_library(box2d STATIC ${Box2D_SRC})
 
 target_include_directories(box2d PUBLIC "box2d")

@@ -5,7 +5,7 @@
 #ifndef CEMENTENGINE_EVENT_HPP
 #define CEMENTENGINE_EVENT_HPP
 
-namespace Cement::Event {
+namespace Cement {
 
     /**
      * @brief The base class for all events

@@ -5,7 +5,7 @@
 #include <entt/entt.hpp>
 #include <entt/signal/sigh.hpp>
 
-namespace Cement::Event {
+namespace Cement {
 
     class EventDispatcher : public entt::dispatcher {
     public:

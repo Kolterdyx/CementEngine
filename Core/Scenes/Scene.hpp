@@ -6,6 +6,8 @@
 #include <vector>
 #include "../EntityComponentSystem/Entity.hpp"
 #include "../UUID/UUID.hpp"
+#include "box2d/box2d.h"
+#include "../Physics/Conversions.hpp"
 
 namespace Cement {
 
@@ -17,6 +19,8 @@ namespace Cement {
         std::unordered_map<UUID, std::unique_ptr<Entity>> entities;
         std::unordered_map<UUID, entt::entity> handles;
         entt::registry entityRegistry;
+
+		b2World world;
 
     public:
 

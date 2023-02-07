@@ -4,7 +4,7 @@
 
 #include "EventDispatcher.hpp"
 
-namespace Cement::Event {
+namespace Cement {
 
     template<typename E, typename... Args>
     void EventDispatcher::emit(Args ...args) {
