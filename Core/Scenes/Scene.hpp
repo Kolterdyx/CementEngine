@@ -4,22 +4,26 @@
 
 #include <stdexcept>
 #include <vector>
-#include "EntityComponentSystem/Entity.hpp"
+//#include "EntityComponentSystem/Entity.hpp"
 #include "UUID/UUID.hpp"
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Physics/Conversions.hpp"
 #include "Physics/Box2DDebugDraw.hpp"
+#include <entt/entt.hpp>
 
 namespace Cement {
 
+
+    class Entity;
 
     class Scene {
 
     private:
         UUID _id;
-        std::unordered_map<UUID, std::unique_ptr<Entity>> entities;
+//        std::unordered_map<UUID, std::unique_ptr<Entity>> entities;
         std::unordered_map<UUID, entt::entity> handles;
+        std::unordered_map<entt::entity, UUID> uuids;
         entt::registry entityRegistry;
         sf::RenderWindow *window;
         b2World *world;
@@ -149,6 +153,19 @@ namespace Cement {
         void setWindow(sf::RenderWindow *window);
 
         Box2DDebugDraw *getDebugDraw();
+
+        Scene &operator=(Scene &other) {
+            if (this != &other) {
+                this->_id = other._id;
+                this->entityRegistry.swap(other.entityRegistry);
+                this->handles = other.handles;
+                this->uuids = other.uuids;
+                this->window = other.window;
+                this->world = other.world;
+                this->_debugDraw = other._debugDraw;
+            }
+            return *this;
+        }
     };
 }
 

@@ -1,5 +1,6 @@
 
 #include "Scene.hpp"
+#include "Components.hpp"
 
 namespace Cement {
     UUID Scene::getId() const {
@@ -8,13 +9,13 @@ namespace Cement {
 
     Scene::Scene(Scene &other) : _id(other._id), world(other.world), window(other.window) {
         entityRegistry.swap(other.entityRegistry);
-        entities.swap(other.entities);
+//        entities.swap(other.entities);
         handles.swap(other.handles);
     }
 
     void Scene::removeEntity(UUID entity) {
         entityRegistry.destroy(handles[entity]);
-        entities.erase(entity);
+//        entities.erase(entity);
         handles.erase(entity);
     }
 
@@ -31,7 +32,7 @@ namespace Cement {
     }
 
     void Scene::setWindow(sf::RenderWindow *window) {
-       this->window = window;
+        this->window = window;
     }
 
     Scene::~Scene() {
@@ -45,8 +46,20 @@ namespace Cement {
 
     void Scene::onCreate() {
         _debugDraw = new Box2DDebugDraw(window);
-
+        int32 flags = 0;
+        flags += b2Draw::e_shapeBit;
+        flags += b2Draw::e_jointBit;
+        flags += b2Draw::e_aabbBit;
+        flags += b2Draw::e_pairBit;
+        flags += b2Draw::e_centerOfMassBit;
+        _debugDraw->SetFlags(flags);
         getWorld()->SetDebugDraw(_debugDraw);
 
+        auto bodyCompEntities = view<BodyComponent>();
+        for (auto entity : bodyCompEntities) {
+            auto &bodyComp = getComponent<BodyComponent>(uuids[entity]);
+            bodyComp.body = getWorld()->CreateBody(&bodyComp.bodyDef);
+            bodyComp.body->CreateFixture(&bodyComp.fixtureDef);
+        }
     }
 }

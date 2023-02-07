@@ -5,11 +5,10 @@ namespace Cement::Math {
 
 	class Vector2f {
 
-	private:
+	public:
 		float x;
 		float y;
 
-	public:
 		Vector2f(float x, float y) : x(x), y(y) {}
 
 		Vector2f operator+(const Vector2f &other) const;

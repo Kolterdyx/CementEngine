@@ -2,15 +2,20 @@
 #ifndef CEMENTENGINE_SCENE_TPP
 #define CEMENTENGINE_SCENE_TPP
 
+#include "globals.hpp"
+
 namespace Cement {
 
     template<typename T, typename... Args>
     UUID Scene::createEntity(Args... args) {
-        T entity(generateUUID());
-        entity.init(args...);
+        auto handle = entityRegistry.create();
+        T entity;
+        entity.create(generateUUID(), this);
         CEMENT_ASSERT((dynamic_cast<Entity *>(&entity) != nullptr), "Class passed is does not inherit publicly from Cement::Entity");
-        entities.insert(std::make_pair(entity.getId(), std::make_unique<T>(entity)));
-        handles.insert(std::make_pair(entity.getId(), entityRegistry.create()));
+        entity.init(args...);
+//        entities.insert(std::make_pair(entity.getId(), std::make_unique<T>(entity)));
+        handles.insert(std::make_pair(entity.getId(), handle));
+        uuids.insert(std::make_pair(handle, entity.getId()));
         return entity.getId();
     }
 

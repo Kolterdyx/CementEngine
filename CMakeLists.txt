@@ -61,6 +61,7 @@ set(CementCoreSources
         Core/Physics/Box2DDebugDraw.cpp
         Core/Physics/Box2DDebugDraw.hpp
         Core/globals.cpp
+        Core/Components.hpp
         )
 
 set(TestSources
@@ -74,7 +75,7 @@ set(AppSources
         App/MyApp.hpp
         App/scenes/PhysicsTestScene.cpp
         App/scenes/PhysicsTestScene.hpp
-        )
+        App/prefabs/TestObject.cpp App/prefabs/TestObject.hpp)
 
 add_executable(${PROJECT_NAME} ${CementCoreSources} ${AppSources})
 
