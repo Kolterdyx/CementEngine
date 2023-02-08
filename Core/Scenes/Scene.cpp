@@ -61,5 +61,17 @@ namespace Cement {
             bodyComp.body = getWorld()->CreateBody(&bodyComp.bodyDef);
             bodyComp.body->CreateFixture(&bodyComp.fixtureDef);
         }
-    }
+	}
+
+	void Scene::onUpdate(float delta) {
+		auto renderCompEntities = view<RenderComponent>();
+		for (auto entity : renderCompEntities) {
+			auto &renderComp = getComponent<RenderComponent>(uuids[entity]);
+			getWindow()->draw(*renderComp.shape);
+		}
+	}
+
+	void Scene::onDestroy() {
+
+	}
 }
