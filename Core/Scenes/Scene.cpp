@@ -64,6 +64,7 @@ namespace Cement {
 	}
 
 	void Scene::onUpdate(float delta) {
+		// TODO: Add a way to call entities' update functions without including them in the scene. Maybe using a component? Or an event?
 		auto renderCompEntities = view<RenderComponent>();
 		for (auto entity : renderCompEntities) {
 			auto &renderComp = getComponent<RenderComponent>(uuids[entity]);
