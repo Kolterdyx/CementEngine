@@ -20,7 +20,6 @@ public:
 
     void init(Cement::Math::Vector2f position);
 
-    friend Cement::Scene;
 };
 
 #endif //CEMENTENGINE_TESTOBJECT_HPP
