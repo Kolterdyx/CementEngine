@@ -55,6 +55,16 @@ namespace Cement {
          */
         void init() {}
 
+		/**
+		 * @brief Entity "destructor". Override this method to clean up your entity (remove components, etc.)
+		 */
+		void destroy() {}
+
+		/**
+		 * @brief Entity update method. Override this method to update your entity (update components, etc.)
+		 */
+		void update() {}
+
         /**
          * @brief Get the UUID of the entity
          */
