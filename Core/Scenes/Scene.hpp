@@ -44,12 +44,12 @@ namespace Cement {
         /**
          * @brief onDestroy() is called when the scene is destroyed. Override this method to initialize your scene.
          */
-        virtual void onDestroy() {};
+        virtual void onDestroy();
 
         /**
          * @brief onUpdate() is called by the scene manager every frame. Override this method to update your scene.
          */
-        virtual void onUpdate(float delta) {};
+        virtual void onUpdate(float delta);
 
         /**
          * @brief load() is called by the scene manager when the scene is loaded. Override this method to load your scene.
