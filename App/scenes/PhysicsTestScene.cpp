@@ -10,12 +10,12 @@
 void PhysicsTestScene::onCreate() {
 
     createEntity<TestObject>(Vector2f(400, 300));
-
+	getWorld()->SetGravity(b2Vec2(0, 9.8));
     Scene::onCreate();
-
 }
 
 void PhysicsTestScene::onUpdate(float delta) {
+	Scene::onUpdate(delta);
     getWorld()->Step(delta, 6, 2);
     getWorld()->DrawDebugData();
     Cement::sleep(1);
