@@ -11,9 +11,10 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "Conversions.hpp"
+#include "Math/Vector2f.hpp"
 #include <iostream>
 
-
+using namespace Cement::Math;
 class Box2DDebugDraw : public b2Draw {
 private:
     sf::RenderWindow *_window;

@@ -23,7 +23,7 @@ namespace Cement {
         return world;
     }
 
-    Scene::Scene() : world(new b2World(Conversions::vec2ToB2Vec2(Vector2f(0, 0)))) {
+    Scene::Scene() : world(new b2World(Vector2f(0, 0))) {
         _id = generateUUID();
     }
 

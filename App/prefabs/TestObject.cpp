@@ -6,7 +6,7 @@ void TestObject::init(Cement::Math::Vector2f position) {
 
     Cement::BodyComponent &body = addComponent<Cement::BodyComponent>();
     body.bodyDef.type = b2_dynamicBody;
-    body.bodyDef.position = Cement::Conversions::vec2ToB2Vec2(position);
+    body.bodyDef.position = position;
     body.bodyDef.angle = 0;
     body.bodyDef.linearVelocity.Set(0, 0);
     body.bodyDef.angularVelocity = 0;
@@ -32,7 +32,9 @@ void TestObject::init(Cement::Math::Vector2f position) {
 
     addComponent<Cement::RenderComponent>();
     Cement::RenderComponent &render = getComponent<Cement::RenderComponent>();
-    render.shape = new sf::RectangleShape(sf::Vector2f(2, 2));
-    render.shape->setOrigin(1, 1);
+	auto size = Vector2f(b2Vec2(abs(polygonShape->m_vertices[0].x * 2), abs(polygonShape->m_vertices[0].y * 2)));
+    render.shape = new sf::RectangleShape(size);
+	render.shape->setPosition(position);
+	render.shape->setOrigin(size.x / 2, size.y / 2);
     render.shape->setFillColor(sf::Color::Red);
 }

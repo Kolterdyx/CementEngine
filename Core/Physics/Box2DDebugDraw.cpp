@@ -1,7 +1,3 @@
-//
-// Created by kolterdyx on 7/02/23.
-//
-
 
 #include "Box2DDebugDraw.hpp"
 
@@ -16,15 +12,17 @@ void Box2DDebugDraw::DrawTransform(const b2Transform &xf) {
 }
 
 void Box2DDebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color) {
-    Vector2f size = Cement::Conversions::b2Vec2ToVec2(p2 - p1);
-    sf::RectangleShape line(sf::Vector2f(size.length(), 2));
-    float angle = atan2(size.getY(), size.getX());
-    line.setRotation(angle * 180 / M_PI);
-    Vector2f pos = Cement::Conversions::b2Vec2ToVec2(p1);
-    line.setPosition(pos.getX(), pos.getY());
-    line.setFillColor(Cement::Conversions::b2ColorTosfColor(color));
-    line.setOutlineThickness(0);
 
+	b2Vec2 size_b2 = p2 - p1;
+
+	Vector2f size = Vector2f(size_b2);
+	Vector2f pos = Vector2f(p1);
+	sf::RectangleShape line(sf::Vector2f(size.length(), 1));
+	float angle = atan2(size.y, size.x);
+	line.setPosition(pos.x, pos.y);
+	line.setOrigin(0, 0.5);
+	line.setRotation(angle * 180 / M_PI);
+	line.setFillColor(Cement::Conversions::b2ColorTosfColor(color));
 
     _window->draw(line);
 }
@@ -37,37 +35,40 @@ void Box2DDebugDraw::DrawPolygon(const b2Vec2 *vertices, int vertexCount, const 
 }
 
 void Box2DDebugDraw::DrawSolidPolygon(const b2Vec2 *vertices, int vertexCount, const b2Color &color) {
-    sf::ConvexShape convex;
-    convex.setPointCount(vertexCount);
-    for (int i = 0; i < vertexCount; i++) {
-        Vector2f pos = Cement::Conversions::b2Vec2ToVec2(vertices[i]);
-        convex.setPoint(i, sf::Vector2f(pos.getX(), pos.getY()));
-    }
-    convex.setFillColor(Cement::Conversions::b2ColorTosfColor(color));
-    convex.setOutlineThickness(0);
+
+	sf::ConvexShape convex;
+	convex.setPointCount(vertexCount);
+	for (int i = 0; i < vertexCount; i++) {
+		convex.setPoint(i, Vector2f(vertices[i]));
+	}
+	convex.setFillColor(Cement::Conversions::b2ColorTosfColor(color));
+	convex.setOutlineThickness(0);
 
     _window->draw(convex);
 }
 
 void Box2DDebugDraw::DrawCircle(const b2Vec2 &center, float radius, const b2Color &color) {
 
-    sf::CircleShape circle(Cement::Conversions::m2p(radius));
-    Vector2f pos = Cement::Conversions::b2Vec2ToVec2(center);
-    circle.setPosition(pos.getX(), pos.getY());
-    circle.setFillColor(sf::Color::Transparent);
-    circle.setOutlineColor(Cement::Conversions::b2ColorTosfColor(color));
-    circle.setOutlineThickness(1);
+	sf::CircleShape circle(Cement::Conversions::m2p(radius));
+	Vector2f pos = Vector2f(center);
+	sf::Color c = Cement::Conversions::b2ColorTosfColor(color);
+	circle.setPosition(pos.x, pos.y);
+	circle.setFillColor(sf::Color::Transparent);
+	circle.setOutlineColor(c);
+	circle.setOutlineThickness(1);
+
     _window->draw(circle);
 }
 
 
 void Box2DDebugDraw::DrawSolidCircle(const b2Vec2 &center, float radius, const b2Vec2 &axis, const b2Color &color) {
-    sf::CircleShape circle(Cement::Conversions::m2p(radius));
-    Vector2f pos = Cement::Conversions::b2Vec2ToVec2(center);
-    sf::Color c = Cement::Conversions::b2ColorTosfColor(color);
-    circle.setPosition(pos.getX(), pos.getY());
-    circle.setFillColor(c);
-    circle.setOutlineThickness(0);
+
+	sf::CircleShape circle(Cement::Conversions::m2p(radius));
+	Vector2f pos = Vector2f(center);
+	sf::Color c = Cement::Conversions::b2ColorTosfColor(color);
+	circle.setPosition(pos.x, pos.y);
+	circle.setFillColor(c);
+	circle.setOutlineThickness(0);
 
     _window->draw(circle);
 }

@@ -1,4 +1,3 @@
-#include <valarray>
 #include "Vector2f.hpp"
 
 namespace Cement::Math {
@@ -164,6 +163,26 @@ namespace Cement::Math {
 
 	Vector2f Vector2f::operator-() const {
 		return {-x, -y};
+	}
+
+	Vector2f::operator std::string() const {
+		return std::string("Vector2f(") + std::to_string(x) + ", " + std::to_string(y) + ")";
+	}
+
+	Vector2f::operator sf::Vector2f() const {
+		return {x, y};
+	}
+
+	Vector2f::operator sf::Vector2i() const {
+		return {static_cast<int>(x), static_cast<int>(y)};
+	}
+
+	Vector2f::operator sf::Vector2u() const {
+		return {static_cast<unsigned int>(x), static_cast<unsigned int>(y)};
+	}
+
+	Vector2f::operator b2Vec2() const {
+		return {Conversions::p2m(x), Conversions::p2m(y)};
 	}
 
 
